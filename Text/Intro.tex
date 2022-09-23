@@ -1,0 +1,52 @@
+\chapter{Introduction}
+Imagine the following situation. 
+
+Sam and Alex are travelling in the car, but its speedometer is broken. Still, Alex wants to know how fast they are going, so he asks Sam. The latter says that they covered 1.2 kilometres in the last minute, so he argues that they are driving 72 km/h. Alex is not, however, satisfied with this answer because he does not want to know the average speed [LT$^{-1}$] for the last minute, or even the last second, rather he wants to know the speed right now.  As they are approaching a road sign, Sam says that they will measure it up there. He observes that they were AT the sign for zero seconds, and the distance was zero meters, so their speed is:
+$$
+\dfrac{0\text{ m}}{0\text{ s}} = \dfrac{0}{0}\,,
+$$
+and he wisely says that he does not know. He argues that he needs to know some distance over some time, so keeping the time should zero cannot be done. 
+
+Actually, Alex wants to know their instantaneous speed, and this might seem pretty amazing, but it is not easy to work out the speed of a car at any point in time. Even the speedometer of a car just shows us an average of how fast we were going for the last (very short) amount of time.
+
+Now, consider we drop a ball from the roof top terrace of the main building at Campus Ledeganck. For the sake of simplicity, we use the following  simplified formula to find the distance $d$ [L], measured in metres, fallen:
+$$
+d=5\,t^2\,,
+$$
+where $t$ [T] is time, measures in seconds. Clearly, after one second, the distance fallen is five metres, but how fast is that? We know
+$$
+\text{speed}=\dfrac{\text{distance}}{\text{time}}\,,
+$$
+so at one second we get a speed of 5 m/s, but as in the previous situation this constitutes an average speed. If we  like to know the instantaneous speed, we run in exactly the same problem as before, as we get for the speed at $t=1$s:
+$$
+\text{speed}=\dfrac{0 \text{ m}}{0\text{ s}}\,.
+$$
+
+Let us try to circumvent this problem by inventing a time $\Delta t$ so short it will not matter. Let us  work out the difference in distance between $t$ and $t+\Delta t$. At 1 second the ball has fallen
+$$
+5\,t^2 = 5 \cdot (1)^2 = 5 \text{ m}.
+$$
+
+At $t+\Delta t$ seconds the ball has fallen
+\begin{eqnarray*}
+5\,t^2& =& 5 \, (1+\Delta t)^2 \text{ m},\\
+&=&5 \, (1+2\Delta t+(\Delta t)^2) \text{ m},\\
+&=&5 + 10\Delta t + 5(\Delta t)^2 \text{ m}.
+\end{eqnarray*}
+
+Consequently, the difference in distance between $t$ and $t+\Delta t$ is
+$$
+10\Delta t + 5(\Delta t)^2 \text{m}\,,
+$$
+while we get the corresponding speed by dividing this change in distance by the time elapse $\Delta t$:
+\begin{eqnarray*}
+\text{speed}&=&\dfrac{10\Delta t + 5(\Delta t)^2 \text{m}}{\Delta t\text{ s}},\\
+&=&10 + 5\Delta t \text{m/s}.
+\end{eqnarray*}
+Now if  we want $\Delta t$ to be so small it will not matter, we shrink it to zero and  get 10 m/s. 
+
+Without really paying attention to it, we just used  calculus to cut time and distance into such small pieces that a pure answer came out. The fundamental idea of calculus is to study change by studying instantaneous change, by which we mean changes over tiny intervals of time.  It turns out that such changes tend to a be lot simpler to analyse than changes over finite intervals of time.
+
+The goal of this course is to get a comprehensive understanding of what calculus exactly is, and even more importantly, what we can do with it. 
+
+In Part~\ref{deel1} we present the preliminaries that one should master before even trying to move on to the study of calculus itself. The latter is the subject of Parts~\ref{deel2} and \ref{deel3}. More precisely, Part~\ref{deel2} introduces differential and integral calculus of functions of one variable, while multivariable functions are covered in Part~\ref{deel3}. 

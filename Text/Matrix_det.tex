@@ -1,0 +1,1093 @@
+\chapter{Matrix algebra and determinants}
+\label{chap_matrices_det}
+\graphicspath{{figures/Matrix_det/}}
+
+
+
+\section{Matrix arithmetic}
+In this section, we study matrices as mathematical objects.  To do so conveniently requires some more notation. 
+If $A$ is an $m \times n$ matrix, that is, a matrix with $m$ rows and $n$ columns, then the scalar entry in the $i$th row and $j$th column of $A$ is denoted by $a_{ij}$. Schematically, we have
+\[ \begin{array}{ccccc} 
+&  &  \text{\begin{tabular}{c} \scriptsize {$j$} counts columns \\ \scriptsize from left to right \end{tabular}} &  & \\  &  & \xrightarrow{\hspace{1.25in}} & & \\
+A & = & \left. \left[ \begin{array}{rrrr} a_{\mbox{\tiny$1$} \mbox{\tiny$1$}} & a_{\mbox{\tiny$1$} \mbox{\tiny$2$}} & \cdots & a_{\mbox{\tiny$1$} \mbox{\tiny$n$}} \\ a_{\mbox{\tiny$2$} \mbox{\tiny$1$}} & a_{\mbox{\tiny$2$} \mbox{\tiny$2$}} & \cdots & a_{\mbox{\tiny$2$} n} \\ \vdots & \vdots  & & \vdots \\ a_{m \mbox{\tiny$1$}} & a_{m \mbox{\tiny$2$}} & \cdots & a_{m n} \end{array}  \right] \right\downarrow & \text{\begin{tabular}{c} \scriptsize {$i$} counts rows \\ \scriptsize from top to bottom \end{tabular}} \end{array} \] 
+
+\label{maindiagonal} The diagonal entries in an $m \times n$ matrix $A=[a_{ij}]$ are $a_{\mbox{\tiny$11$}} , a_{\mbox{\tiny$22$}} , a_{\mbox{\tiny$33$}} , \ldots$ and comprise what is called the\index{matrix ! main diagonal}\index{main diagonal} \textbf{main diagonal} (\textit{hoofddiagonaal}) of the matrix.  A \textbf{diagonal matrix} (\textit{diagonaalmatrix}) is a square $n \times n$ matrix whose nondiagonal entries are zero. A\index{matrix ! square matrix}\index{square matrix} \textbf{square matrix} (\textit{vierkante matrix}) has the same number of rows as columns.  An $m \times n$ matrix whose entries are all zero is a zero matrix and is written as 0. \\
+
+
+With this new notation we can define what it means for two matrices to be equal.
+
+\smallskip
+
+
+	
+\begin{definition}[Matrix equality] \label{matrixequality} 
+Two matrices $A$ and $B$ are said to be \index{matrix ! equality} \textbf{equal} (\textit{gelijk}) if they are of the same size and their corresponding entries are equal.  More specifically, if $A=\left[a_{ij}\right]$ is an $m \times n$ matrix and $B =\left[b_{ij}\right]$ an $p \times r$ matrix, we write $A=B$ provided 
+		
+\begin{enumerate}	
+\item  $m=p$ and $n=r$
+\item  $a_{ij} = b_{ij}$ for all $1 \leq i \leq m$ and all $1 \leq j \leq n$.		
+\end{enumerate}
+\end{definition}
+	
+
+\smallskip
+
+Essentially, two matrices are equal if they are of the same size and they have the same numbers in the same spots. For example, the two $2 \times 3$ matrices below are, despite appearances, equal.
+
+\[ \left[ \begin{array}{rrr} 0 & -2 & 9 \\ 25 & 117 & -3 \\ \end{array} \right] =  \left[ \begin{array}{rrr} \ln(1) & \sqrt[3]{-8} & e^{2\ln(3)} \\ 125^{2/3} &  3^{2} \cdot 13 & \log(0.001)  \end{array} \right]\]
+
+Now that we have an agreed upon understanding of what it means for two matrices to equal each other, we may begin defining arithmetic operations on matrices.  Our first operation is addition.
+\smallskip
+
+
+\begin{definition}[Matrix addition] \label{matrixaddition} \index{matrix ! addition ! definition of} 
+Given two $m \times n$ matrices $A$ and $B$, the matrix obtained by adding the corresponding entries of the two matrices is called the \index{matrix ! sum} \textbf{sum} of the two matrices. More specifically,  if $A =\left[a_{ij}\right]$ and $B =\left[b_{ij}\right]$, we define the $m \times n$ matrix \[A + B = \left[a_{ij}\right]+ \left[b_{ij}\right] = \left[ a_{ij} + b_{ij} \right].\]		
+\end{definition}
+	
+\smallskip
+
+%\begin{example} 
+Consider the sum below.
+
+\[ \left[ \begin{array}{rr}2 & 3 \\ 4 & -1 \\ 0 & -7 \\ \end{array} \right] + \left[ \begin{array}{rr} -1 & 4 \\ -5 & -3 \\ 8 & 1 \\ \end{array} \right] = \left[ \begin{array}{rr} 2 + (-1) & 3+4 \\ 4+(-5) & (-1)+(-3) \\ 0+8 & (-7)+ 1 \\ \end{array} \right]  = \left[ \begin{array}{rr} 1 & 7 \\ -1 & -4 \\ 8 & -6 \\ \end{array} \right] \]
+
+%\xhrulefill{gray}{2.5pt}Solution \xhrulefill{gray}{2.5pt}
+
+
+It is worth the reader's time to think what would have happened had we reversed the order of the summands above.  As we would expect, we arrive at the same answer.  In general, $A+B = B+A$ for matrices $A$ and $B$, provided they are the same size so that the sum is defined in the first place.  This is the \index{matrix ! addition ! commutative property} \index{commutative property ! matrix ! addition} commutative property of matrix addition.  To see why this is true in general, we appeal to the definition of matrix addition.  Given an $m\times n$ matrix $A =\left[a_{ij}\right]$ and an $m\times n$ matrix $B =\left[b_{ij}\right]$, \[A + B = \left[a_{ij}\right] + \left[b_{ij}\right] = \left[ a_{ij} + b_{ij} \right] = \left[ b_{ij} + a_{ij} \right] = \left[b_{ij}\right] + \left[a_{ij}\right] =B+A,\] where the second equality is the definition of $A+B$, the third equality holds by the commutative law of real number addition, and the fourth equality is the definition of $B+A$.  In other words, matrix addition is commutative because real number addition is.  A similar argument shows the \index{matrix ! addition ! associative property} \index{associative property ! matrix ! addition} associative property of matrix addition also holds, inherited in turn from the associative law of real number addition.  Specifically, for matrices $A$, $B$, and $C$ of the same size:
+\[(A+B)+C = A+(B+C). \]  
+This means that we can write $A+B+C$ without parentheses and there is no ambiguity as to what this means.
+%These properties and more are summarized in the following theorem.
+%\end{example}
+
+\smallskip
+
+\begin{theorem}[Properties of matrix addition] \label{matrixadditionprops}\index{matrix ! addition ! properties of}
+\begin{itemize}
+	\item  \textbf{Commutative property} (\textit{Commutatieve eigenschap}):  For all $m \times n$ matrices, it holds that 
+	\[A + B = B + A.\]
+	\item  \textbf{Associative property}  (\textit{Associatieve eigenschap}):  For all $m \times n$ matrices, it holds that 
+	\[(A + B) + C = A + (B + C). \]
+	\item  \textbf{Identity property}  (\textit{Neutraal element})\index{identity ! matrix, additive}: If $0$ is the $m \times n$ matrix whose entries are all $0$, then $0$ is called the\index{matrix ! additive identity} \textbf{\boldmath $m \times n$ additive identity} and for all $m \times n$ matrices $A$, it holds that
+	\[A + 0 = 0 + A = A.\] 
+	\item  \textbf{Inverse property} (\textit{Invers element})\index{inverse ! matrix, additive}: For every given $m \times n$ matrix $A$, there is a unique matrix, denoted $-A$, called the \index{matrix ! additive inverse} \textbf{additive inverse of \boldmath $A$} such that \[A + (-A) = (-A) + A = 0.\]
+\end{itemize}
+\end{theorem}
+
+
+\smallskip
+
+The identity property is easily verified by resorting to the definition of matrix addition;  just as the number $0$ is the additive identity for real numbers, the matrix comprised of all $0$'s does the same job for matrices.  To establish the inverse property, given an $m\times n$ matrix $A=\left[a_{ij}\right]$, we are looking for an $m\times n$ matrix $B = \left[b_{ij}\right]$ so that $A + B = 0$.  By the definition of matrix addition, we must have that $a_{ij} + b_{ij} = 0$ for all $i$ and $j$.  Solving,  we get $b_{ij} = -a_{ij}$.   Hence, given a matrix $A$, its additive inverse, which we call $-A$, does exist and is unique and, moreover, is given by the formula:  $-A = \left[ - a_{ij}\right]$. 
+With the concept of additive inverse well in hand, we may now discuss what is meant by subtracting matrices. For two matrices $A$ and $B$ of the same size, we define $A-B = A + (-B)$.  At the level of entries, this amounts to
+
+\[A-B = A + (-B) = \left[a_{ij}\right]+ \left[-b_{ij}\right] = \left[a_{ij} + \left(-b_{ij}\right) \right]= \left[a_{ij} - b_{ij} \right].\]
+
+Thus to subtract two matrices of equal size, we subtract their corresponding entries.
+
+
+\smallskip
+Our next task is to define what it means to multiply a matrix by a real number. This leads us to the following definition.  
+
+\smallskip
+
+
+	
+\begin{definition}[Scalar multiplication] \label{scalarmultmatrix} \index{scalar multiplication ! matrix ! definition of} \index{matrix ! scalar multiplication ! definition of}
+We define the product of a real number and a matrix to be the matrix obtained by multiplying each of its entries by said real number.  More specifically, if $k$ is a real number and $A=\left[a_{ij}\right]$ an $m\times n$ matrix, we define an $m\times n$ matrix \[kA = k\left[a_{ij}\right] = \left[ka_{ij}\right].\]
+\end{definition}
+	
+The word `scalar' here refers to real numbers.  `Scalar multiplication' in this context means we are multiplying a matrix by a real number (a scalar).
+
+\smallskip
+
+As did matrix addition, scalar multiplication inherits many properties from real number arithmetic.  Below we summarize these properties.
+
+\smallskip
+
+\begin{theorem}[Properties of scalar multiplication]  \label{matrixscalarmultprops}\index{matrix ! scalar multiplication ! properties of} \index{scalar multiplication ! matrix ! properties of}
+		
+\begin{itemize}	
+\item  \textbf{Associative property}: \index{matrix ! scalar multiplication ! associative property of} \index{associative property ! matrix ! scalar multiplication} \index{scalar multiplication ! matrix ! associative property of} For every  $m \times n$ matrix $A$ and scalars  $k$ and $r$, it holds that
+\[ (kr)A = k(rA). \]
+			
+\item  \textbf{Identity property}:\index{matrix ! scalar multiplication ! identity for} For all $m \times n$ matrices $A$, it holds that 
+\[1A = A. \]
+			
+\item  \textbf{Additive Inverse property}:\index{inverse ! matrix, additive} \index{inverse ! matrix, additive} For all $m \times n$ matrices $A$, it holds that
+\[-A = (-1)A. \] 
+			
+\item  \textbf{Distributive property of scalar multiplication over scalar addition}: \index{matrix ! scalar multiplication ! distributive properties} \index{distributive property ! matrix ! scalar multiplication} \index{scalar multiplication ! matrix ! distributive properties of} For every  $m \times n$ matrix $A$ and scalars $k$ and $r$, it holds that
+\[(k+r)A = kA + rA.\]
+			
+\item  \textbf{Distributive property of scalar multiplication over matrix addition}: For all $m \times n$ matrices $A$ and $B$ scalars $k$, it holds that
+\[k(A+B) = kA + kB.\] 
+			
+\item  \textbf{Zero product property}:  \index{matrix ! scalar multiplication ! zero product property} If $A$ is an $m \times n$ matrix and $k$ is a scalar, then 
+\[kA = 0 \quad \text{if and only if} \quad k=0 \quad \text{or} \quad A = 0.\]
+			
+\end{itemize}
+
+\end{theorem}		
+
+
+\smallskip
+
+%As with the other results in this section, Theorem \ref{matrixscalarmultprops} can be proved using the definitions of scalar multiplication and matrix addition.  For example, to prove that $k(A+B) = kA + kB$ for a scalar $k$ and $m \times n$ matrices $A$ and $B$, we start by adding $A$ and $B$, then multiplying by $k$ and seeing how that compares with the sum of $kA$ and $kB$. \[ k(A+B) = k \left(\left[a_{ij}\right]_{m \times n} + \left[b_{ij}\right]_{m \times n}\right) = k \left[a_{ij} + b_{ij} \right]_{m \times n} = \left[k \left(a_{ij}+b_{ij}\right)\right]_{m \times n} = \left[ka_{ij} + kb_{ij}\right]_{m \times n}\]
+%
+%As for $kA + kB$, we have
+%
+%\[ kA + kB = k\left[a_{ij}\right]_{m \times n}+k\left[b_{ij}\right]_{m \times n} =  \left[ka_{ij}\right]_{m \times n}+\left[kb_{ij}\right]_{m \times n} = \left[ka_{ij} + kb_{ij}\right]_{m \times n} \, \, \checkmark \]
+%
+%which establishes the property.  The remaining properties are left to the reader.  
+The properties in Theorems \ref{matrixadditionprops} and \ref{matrixscalarmultprops} establish an algebraic system that lets us treat matrices and scalars more or less as we would real numbers and variables, as the next example illustrates.
+
+
+\begin{example} \label{matrixaddscalarex} 
+Solve for the matrix $A$:  
+\[3A - \left(\left[ \begin{array}{rr} 2 & -1 \\ 3 & 5 \\ \end{array}\right] + 5A\right) = \left[ \begin{array}{rr} -4 & 2 \\ 6 & -2 \\ \end{array}\right] + \dfrac{1}{3} \left[ \begin{array}{rr} 9 & 12 \\ -3 & 39 \\ \end{array}\right]\] 
+using the definitions and properties of matrix arithmetic.
+	
+		
+\xhrulefill{gray}{2.5pt}Solution \xhrulefill{gray}{2.5pt}
+	
+
+
+ $$\begin{array}{rrcl}
+	& 3A - \left(\left[ \begin{array}{rr} 2 & -1 \\ 3 & 5 \\ \end{array}\right] + 5A\right) & = & \left[ \begin{array}{rr} -4 & 2 \\ 6 & -2 \\ \end{array}\right] + \dfrac{1}{3} \left[ \begin{array}{rr} 9 & 12 \\ -3 & 39 \\ \end{array}\right]  \\ [13pt]
+	
+	
+	
+	\Leftrightarrow & 3A - \left(\left[ \begin{array}{rr} 2 & -1 \\ 3 & 5 \\ \end{array}\right] + 5A\right) & = & \left[ \begin{array}{rr} -4 & 2 \\ 6 & -2 \\ \end{array}\right] +  \left[ \begin{array}{rr} \left(\frac{1}{3}\right)(9) & \left(\frac{1}{3}\right)(12) \\[2pt] \left(\frac{1}{3}\right)(-3) & \left(\frac{1}{3}\right)(39) \\ \end{array}\right]  \\ [13pt]
+	
+	
+	
+	\Leftrightarrow & 3A - \left(\left[ \begin{array}{rr} 2 & -1 \\ 3 & 5 \\ \end{array}\right] + 5A\right)  & = & \left[ \begin{array}{rr} -4 & 2 \\ 6 & -2 \\ \end{array}\right] + \left[ \begin{array}{rr} 3 & 4 \\ -1 & 13 \\ \end{array}\right] \\ [13pt]
+	
+		
+	
+	\Leftrightarrow & 3A - \left(\left[ \begin{array}{rr} 2 & -1 \\ 3 & 5 \\ \end{array}\right] + 5A\right)  & = & \left[ \begin{array}{rr} -1 & 6 \\ 5 & 11 \\ \end{array}\right]  \\ [13pt]
+	
+	
+		
+	\Leftrightarrow &	3A + \left[ \begin{array}{rr} -2 & 1 \\ -3 & -5 \\ \end{array}\right] + (-5)A & = & \left[ \begin{array}{rr} -1 & 6 \\ 5 & 11 \\ \end{array}\right]  \\ [13pt]
+	\end{array}
+	$$
+	
+	$$
+	\begin{array}{rrcl}
+
+
+	
+
+	
+	
+	\Leftrightarrow &	3A + (-5)A+ \left[ \begin{array}{rr} -2 & 1 \\ -3 & -5 \\ \end{array}\right]& = & \left[ \begin{array}{rr} -1 & 6 \\ 5 & 11 \\ \end{array}\right] \\ [13pt]
+	
+	
+	
+	\Leftrightarrow &	(3+ (-5))A+ \left[ \begin{array}{rr} -2 & 1 \\ -3 & -5 \\ \end{array}\right] + \left(-\left[ \begin{array}{rr} -2 & 1 \\ -3 & -5 \\ \end{array}\right] \right)& = & \left[ \begin{array}{rr} -1 & 6 \\ 5 & 11 \\ \end{array}\right] + \left(-\left[ \begin{array}{rr} -2 & 1 \\ -3 & -5 \\ \end{array}\right] \right) \\ [13pt]
+	
+	
+	
+	\Leftrightarrow &	(-2)A+ 0_{2 \times 2} & = & \left[ \begin{array}{rr} -1 & 6 \\ 5 & 11 \\ \end{array}\right] -\left[ \begin{array}{rr} -2 & 1 \\ -3 & -5 \\ \end{array}\right] \\ [13pt]
+	
+	
+	\Leftrightarrow & (-2)A & = & \left[ \begin{array}{rr} 1 & 5 \\ 8 & 16 \\ \end{array}\right] \\ [13pt]
+	
+	
+	\Leftrightarrow &	A & =  &  \left[ \begin{array}{rr} -\frac{1}{2} & -\frac{5}{2} \\[2pt] -4 & -8 \\ \end{array}\right] \\ [13pt]
+	
+	\end{array} $$
+
+\end{example}
+
+
+\smallskip
+
+We now turn our attention to \textbf{matrix multiplication} (\textit{matrixvermenigvuldiging}), that is, multiplying a matrix by another matrix.  You may expect that in order to multiply two matrices, they must be of the same size and you find the product by multiplying the corresponding entries.  While this kind of product is used in other areas of mathematics, we define matrix multiplication to serve us in solving systems of linear equations.  To that end, we begin by defining the product of a row and a column.  We motivate the general definition with an example.  Consider the two matrices $A$ and $B$ below.
+\[ A = \left[\begin{array}{rrr} 2 & \hphantom{-}0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right] \qquad \qquad B = \left[\begin{array}{rrrr} 3 & \hphantom{-}1 & 2 & -8 \\ 4 & 8 & -5 & 9  \\ 5 & 0 & -2 & -12 \\  \end{array} \right]\]
+
+Let $R_1$ denote the first row of $A$ and $C_1$ denote the first column of $B$.  To find the product of $R_1$ with $C_1$, denoted $R_1 \cdot C_1$, we first find the product of the first entry in $R_1$ and the first entry in $C_1$.  Next, we add to that the product of the second entry in $R_1$ and the second entry in $C_1$.  Finally, we take that sum and we add to that the product of the last entry in $R_1$ and the last entry in $C_1$.  Using entry notation, $R_1 \cdot C_1 = a_{\mbox{\tiny$11$}}b_{\mbox{\tiny$11$}} + a_{\mbox{\tiny$12$}}b_{\mbox{\tiny$21$}}+a_{\mbox{\tiny$13$}}b_{\mbox{\tiny$31$}} = (2)(3) + (0)(4) + (-1)(5) = 6 + 0 + (-5) = 1$.  We can visualize this schematically as follows
+
+\[ \left[\begin{array}{rrr} \rowcolor[gray]{0.9} 2 &  0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right] \left[\begin{array}{>{\columncolor[gray]{0.9}}rrrr}  3 & 1 & 2 & -8 \\ 4 & 8 & -5 & 9  \\ 5 & 0 & -2 & -12 \\  \end{array} \right] \]
+
+
+\[ \begin{array}{ccccc}
+
+\underbrace{\begin{array}{rl} \stackrel{\xrightarrow{\hspace{.75in}}}{\begin{array}{ccc} \fbox{2} &  \hphantom{-}0 & -1 \end{array}} & \left. \begin{array}{c} \fbox{3}  \\ 4   \\ 5  \\ \end{array} \right\downarrow \\ \end{array}}
+
+&
+
+&
+
+\underbrace{\begin{array}{rl} \stackrel{\xrightarrow{\hspace{.75in}}}{\begin{array}{ccc} 2 & \hphantom{-}\fbox{0} & -1 \end{array}} &  \left.  \begin{array}{c} 3 \\ \fbox{4}    \\ 5  \\ \end{array} \right\downarrow \\\end{array}}
+
+& 
+
+
+&
+
+
+\underbrace{\begin{array}{rl} \stackrel{\xrightarrow{\hspace{.75in}}}{\begin{array}{ccc} 2 & \hphantom{-}0 & \fbox{$-1$} \end{array}} &  \left. \begin{array}{c} 3 \\ 4 \\ \fbox{5}   \\ \end{array} \right\downarrow \\ \end{array}}  \\
+
+a_{\mbox{\tiny$11$}}b_{\mbox{\tiny$11$}} & + & a_{\mbox{\tiny$12$}}b_{\mbox{\tiny$21$}} & + & a_{\mbox{\tiny$13$}}b_{\mbox{\tiny$31$}}  \\
+
+(2)(3) & + &(0)(4)& + & (-1)(5)  \\
+
+\end{array}\]
+
+
+
+To find $R_2 \cdot C_3$ where $R_2$ denotes the second row of $A$ and $C_3$ denotes the third column of $B$, we proceed similarly. We start with finding the product of the first entry of $R_2$ with the first entry in $C_3$ then add to it the product of the second entry in $R_2$ with the second entry in $C_3$, and so forth.  Using entry notation, we have $R_2 \cdot C_3 = a_{\mbox{\tiny$21$}}b_{\mbox{\tiny$13$}} + a_{\mbox{\tiny$22$}}b_{\mbox{\tiny$23$}} + a_{\mbox{\tiny$23$}}b_{\mbox{\tiny$33$}} = (-10)(2) + (3)(-5) + (5)(-2) = -45$.  Schematically, 
+
+\[ \left[\begin{array}{rrr} 2 & 0 & -1 \\ \rowcolor[gray]{0.9} -10 & \hphantom{-}3 & 5 \\ \end{array} \right] \left[\begin{array}{rr>{\columncolor[gray]{0.9}}rr}  3 & \hphantom{-}1 & 2 & -8 \\ 4 & 8 & -5 & 9  \\ 5 & 0 & -2 & -12 \\  \end{array} \right] \]
+
+
+\[ \begin{array}{ccccc}
+
+\underbrace{\begin{array}{rl} \stackrel{\xrightarrow{\hspace{.75in}}}{\begin{array}{ccc} \fbox{$-10$} &  3 & 5 \end{array}} & \left. \begin{array}{c} \fbox{\hphantom{$-$}2}  \\ -5   \\ -2  \\ \end{array} \right\downarrow \\ \end{array}}
+
+&
+
+&
+
+\underbrace{\begin{array}{rl} \stackrel{\xrightarrow{\hspace{.75in}}}{\begin{array}{ccc} -10 & \fbox{3} & 5 \end{array}} &  \left.  \begin{array}{c} \hphantom{-}2 \\ \fbox{$-5$}    \\ -2  \\ \end{array} \right\downarrow \\\end{array}}
+
+& 
+
+
+&
+
+
+\underbrace{\begin{array}{rl} \stackrel{\xrightarrow{\hspace{.75in}}}{\begin{array}{ccc} -10 & 3 & \fbox{$5$} \end{array}} &  \left. \begin{array}{c} \hphantom{-}2 \\ -5 \\ \fbox{$-2$}   \\ \end{array} \right\downarrow \\ \end{array}}   \\
+
+a_{\mbox{\tiny$21$}}b_{\mbox{\tiny$13$}}= (-10)(2) = -20 & + & a_{\mbox{\tiny$22$}}b_{\mbox{\tiny$23$}} = (3)(-5)  = -15 & + & a_{\mbox{\tiny$23$}}b_{\mbox{\tiny$33$}} = (5)(-2)  = -10 \\
+
+\end{array}\]
+
+Generalizing this process, we have the following definition.
+
+\smallskip
+
+\begin{definition}[Product of a row and a column] \label{rowcolumnproduct}   
+Suppose an $m\times n$ matrix $A = [a_{ij}]$ and an $n\times r$ matrix $B = [b_{ij}]$.  Let $R_i$ denote the $i$th row of $A$ and let $C_j$ denote the $j$th column of $B$.  The \index{matrix ! product of row and column} product of $R_{i}$ and $C_{j}$, denoted $R_{i} \cdot C_{j}$, is the real number defined by
+\[ R_i \cdot C_j = a_{i\mbox{\tiny$1$}}b_{\mbox{\tiny$1$}j} + a_{i\mbox{\tiny$2$}}b_{\mbox{\tiny$2$}j} + \ldots a_{in}b_{nj}.\]
+		
+\end{definition}
+	
+
+
+\smallskip
+
+Note that in order to multiply a row by a column, the number of entries in the row must match the number of entries in the column.  We are now in the position to define matrix multiplication.  
+
+\smallskip
+
+
+	
+\begin{definition}[Matrix multiplication] \label{matrixproduct}  
+Suppose an $m\times n$ matrix $A = [a_{ij}]$ and an $n\times r$ matrix $B = [b_{ij}]$.   Let $R_i$ denote the $i$th row of $A$ and let $C_j$ denote the $j$th column of $B$.  The \index{matrix ! matrix multiplication ! definition of} \textbf{product of \boldmath $A$ and \boldmath $B$} (\textit{product van $A$ en $B$}), denoted $AB$, is the $m \times r$ matrix defined by
+\[AB = \left[ R_i \cdot C_j \right] \]
+		
+that is
+\[
+AB = \left[
+		\begin{array}{cccc} 
+		R_1 \cdot C_1 & R_1 \cdot C_2 & \ldots & R_1 \cdot C_r \\  
+		R_2 \cdot C_1 & R_2 \cdot C_2 & \ldots & R_2 \cdot C_r \\
+		\vdots  & \vdots & & \vdots \\
+		R_m \cdot C_1 & R_m \cdot C_2 & \ldots & R_m \cdot Cr \\  \end{array} \right] .
+\]
+		
+\end{definition}
+
+\smallskip
+
+There are a number of subtleties in Definition \ref{matrixproduct} which warrant closer inspection. First and foremost, Definition \ref{matrixproduct} tells us that the $ij$-entry of a matrix product $AB$ is the $i$th row of $A$ times the $j$th column of $B$.  In order for this to be defined, the number of entries in the rows of $A$ must match the number of entries in the columns of $B$. This means that the number of columns of $A$ must match the number of rows of $B$.  In other words, to multiply $A$ times $B$, the second dimension of $A$ must match the first dimension of $B$, which is why in Definition \ref{matrixproduct}, an $m \times \underline{n}$ matrix $A$ is being multiplied by an $\underline{n} \times r$ matrix $B$.  Furthermore, the product matrix $AB$ has as many rows as $A$ and as many columns of $B$. As a result, when multiplying an $\underline{m} \times n$ matrix $A$ by an $n \times \underline{r}$ matrix $B$, the result is the $\underline{m} \times \underline{r}$ matrix $AB$. Returning to our example matrices below, we see that $A$ is a $2 \times \underline{3}$ matrix and $B$ is a $\underline{3} \times 4$ matrix.  This means that the product matrix $AB$ is defined and will be a $2 \times 4$ matrix.
+
+\[A = \left[\begin{array}{rrr} 2 & \hphantom{-}0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right] \qquad  \qquad
+B = \left[\begin{array}{rrrr} 3 & \hphantom{-}1 & 2 & -8 \\ 4 & 8 & -5 & 9  \\ 5 & 0 & -2 & -12 \\  \end{array} \right]
+\]
+
+
+Using $R_i$ to denote the $i$th row of $A$ and $C_j$ to denote the $j$th column of $B$, we form $AB$ according to Definition \ref{matrixproduct}.
+
+\[ \begin{array}{rclcl}
+
+AB & = & \left[\begin{array}{rrrr} R_1 \cdot C_1 &   R_1 \cdot C_2 & R_1 \cdot C_3 & R_1 \cdot C_4 \\ R_2 \cdot C_1 &   R_2 \cdot C_2 & R_2 \cdot C_3 & R_2 \cdot C_4 \\  \end{array} \right] & = & \left[\begin{array}{rrrr} 1 &  \hphantom{-}2 & 6 & -4 \\ 7 &  14 & -45 & 47 \\  \end{array} \right] \\ \end{array} \]
+
+Note that the product $BA$ is not defined, since $B$ is a $3 \times \underline{4}$ matrix while $A$ is a $\underline{2} \times 3$ matrix;  $B$ has more columns than $A$ has rows, and so it is not possible to multiply a row of $B$ by a column of $A$.  Even when the dimensions of $A$ and $B$ are compatible such that $AB$ and $BA$ are both defined, the product $AB$ and $BA$ aren't necessarily equal and may not even have the same dimensions.  For example, if $A$ is a $2 \times 3$ matrix and $B$ is a $3 \times 2$ matrix, then $AB$ is defined and is a $2 \times 2$ matrix while $BA$ is also defined, but is a $3 \times 3$ matrix. In other words, $AB$ may not equal $BA$. Although there is no commutative property of matrix multiplication in general, several other real number properties are inherited by matrix multiplication, as illustrated in our next theorem.
+
+\smallskip
+
+\begin{theorem}[Properties of matrix multiplication]
+\label{matrixmultprops}\textbf{} \index{matrix ! matrix multiplication ! properties of} 
+Let $A$, $B$ and $C$ be matrices such that all of the matrix products below are defined and let $k$ be a real number.
+		
+\begin{itemize}
+			
+	\item  \textbf{Associative property of matrix multiplication}:\index{matrix ! matrix multiplication ! associative property of} 
+	\[(AB)C = A(BC). \] 
+			
+	\item  \textbf{Associative property with scalar multiplication}:
+	\[k(AB) = (kA)B = A(kB). \]
+			
+	\item  \textbf{Identity property}:\index{matrix ! matrix multiplication ! identity for} For a natural number $k$, the \textbf{\boldmath $k \times k$ identity matrix}, denoted $I_{k}$, is defined by $I_{k} = \left[d_{ij} \right]_{k \times k}$ where
+	\[ d_{ij} = \left\{ \begin{array}{rcl} 1, & \text{ if } & i=j, \\ 0, & \text{ if } & i \neq j. \\ \end{array} \right.\]
+	For all $m \times n$ matrices $A$, it holds that
+	\[ I_{m}A = AI_{n} = A.\] \index{identity ! matrix, multiplicative}
+			
+	\item  \textbf{Distributive property of matrix multiplication over matrix addition}: \index{matrix ! matrix multiplication ! distributive property} \index{distributive property ! matrix ! matrix multiplication} \[A(B \pm C) = AB \pm AC \quad \mbox{ and } \quad (A \pm B)C = AC \pm BC.\]
+			
+	\end{itemize}
+
+\end{theorem}
+
+\smallskip
+
+The one property in Theorem \ref{matrixmultprops} which begs further investigation is, without doubt, the multiplicative identity. The identity matrix has $1$'s along its main diagonal and $0$'s everywhere else.  A few examples of the matrix $I_{k}$ mentioned in Theorem \ref{matrixmultprops} are given below.  
+
+\[ \begin{array}{ccccc}
+
+[1]&  \qquad \left[ \begin{array}{rr} 1 & 0 \\ 0 & 1 \\ \end{array} \right] &  \qquad  \left[ \begin{array}{rrr} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{array} \right] &  \qquad \left[ \begin{array}{rrrr} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\  0 & 0 & 0 & 1 \\  \end{array} \right] \\
+I_{\mbox{\tiny$1$}} &  \qquad  I_{\mbox{\tiny$2$}} &  \qquad I_{\mbox{\tiny$3$}} & \qquad  I_{\mbox{\tiny$4$}} \\
+
+\end{array} \]
+
+Note that to in order to verify that the identity matrix acts as a multiplicative identity, some care must be taken depending on the order of the multiplication.  For example, take the matrix $2 \times 3$ matrix $A$ from earlier
+
+\[A = \left[\begin{array}{rrr} 2 & \hphantom{-}0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right].\]
+
+In order for the product $I_{k}A$ to be defined, $k = 2$;  similarly, for $AI_{k}$ to be defined, $k = 3$.  We leave it to the reader to show $I_{\mbox{\tiny$2$}}A = A$ and $AI_{\mbox{\tiny$3$}} = A$.  In other words,
+
+
+\[\begin{array}{rcl}
+\left[ \begin{array}{rr} 1 & 0 \\ 0 & 1 \\ \end{array} \right] \left[\begin{array}{rrr} 2 & \hphantom{-}0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right] & = & \left[\begin{array}{rrr} 2 & \hphantom{-}0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right] \\ \end{array}\]
+
+and
+\[\begin{array}{rcl}
+\left[\begin{array}{rrr} 2 & \hphantom{-}0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right]\left[ \begin{array}{rrr} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{array} \right] & = & \left[\begin{array}{rrr} 2 & \hphantom{-}0 & -1 \\ -10 & 3 & 5 \\ \end{array} \right]. \\ \end{array}\]
+
+\smallskip
+
+
+As a special case of matrix multiplication we can multiply a matrix $A$ by itself. More in general we can compute $A^k$, with $k$ a positive integer. 
+
+\begin{definition}[Power of a matrix]\label{matrixpower}
+If $A$ is an $n \times n$ matrix and if $k$ is a positive integer, then $A^k$ denotes the product of $k$ copies of $A$:
+\[ A^k = \underbrace{A \ldots A}_{k} . \]
+\end{definition}
+The power $A^0$ is interpreted as the identity matrix.
+
+
+\begin{example} \label{matrixmultex} 
+		
+\begin{enumerate}
+	\item  Find $AB$ for $A = \left[ \begin{array}{rrr} -23 & -1 & 17 \\ 46 & 2 & -34 \\ \end{array} \right]$ and $B = \left[ \begin{array}{rr} -3 & 2 \\ 1 & 5 \\ -4 & 3 \\ \end{array} \right].$
+		
+	\item  Find $C^2 -5C + 10I_{\mbox{\tiny$2$}}$ for $C = \left[ \begin{array}{rr} 1 & -2 \\ 3 & 4 \\ \end{array} \right].$
+		
+	\item  Suppose $M$ is a $4 \times 4$ matrix. Expand $\left(M - 2I_{\mbox{\tiny$4$}}\right)\left(M + 3I_{\mbox{\tiny$4$}}\right)$.
+		
+\end{enumerate}
+
+
+	
+\xhrulefill{gray}{2.5pt}Solution \xhrulefill{gray}{2.5pt}
+
+
+	
+	\begin{enumerate}
+		
+		\item  We have $AB = \left[ \begin{array}{rrr} -23 & -1 & 17 \\ 46 & 2 & -34  \end{array} \right] \left[ \begin{array}{rr} -3 & 2 \\ 1 & 5 \\ -4 & 3  \end{array} \right] =  \left[ \begin{array}{rr} 0 & 0 \\ 0 & 0  \end{array} \right] $.
+		
+		
+		\item Just as $x^2$ means $x$ times itself, $C^2$ denotes the matrix $C$ times itself.  We get
+		
+		\[ \begin{array}{rcl}
+		
+		C^2 -5C + 10I_{\mbox{\tiny$2$}} & = & \left[ \begin{array}{rr} 1 & -2 \\ 3 & 4 \\ \end{array} \right]^2 - 5 \left[ \begin{array}{rr} 1 & -2 \\ 3 & 4 \\ \end{array} \right] + 10 \left[ \begin{array}{rr} 1 & 0 \\ 0 & 1 \\ \end{array} \right] \\ [13pt]
+		
+		& = & \left[ \begin{array}{rr} 1 & -2 \\ 3 & 4 \\ \end{array} \right]\left[ \begin{array}{rr} 1 & -2 \\ 3 & 4 \\ \end{array} \right] + \left[ \begin{array}{rr} -5 & 10 \\ -15 & -20 \\ \end{array} \right] + \left[ \begin{array}{rr} 10 & 0 \\ 0 & 10 \\ \end{array} \right] \\ [13pt]
+		
+		& = & \left[ \begin{array}{rr} -5 & -10 \\ 15 & 10 \\ \end{array} \right] + \left[ \begin{array}{rr} 5 & 10 \\ -15 & -10 \\ \end{array} \right]  \\ [13pt]
+		
+		& = &  \left[ \begin{array}{rr} 0 & 0 \\ 0 & 0 \\ \end{array} \right]. \\
+		
+		
+		\end{array} \]
+		
+		\item  We expand $\left(M - 2I_{\mbox{\tiny$4$}}\right)\left(M + 3I_{\mbox{\tiny$4$}}\right)$ with the same pedantic zeal we showed in Example \ref{matrixaddscalarex}. The reader is encouraged to determine which property of matrix arithmetic is used as we proceed from one step to the next.
+		
+		\[\begin{array}{rcl}
+		
+		\left(M - 2I_{\mbox{\tiny$4$}}\right)\left(M + 3I_{\mbox{\tiny$4$}}\right) & = & \left(M - 2I_{\mbox{\tiny$4$}}\right) M + \left(M - 2I_{\mbox{\tiny$4$}}\right)\left( 3I_{\mbox{\tiny$4$}}\right) \\
+		& = & MM - \left(2I_{\mbox{\tiny$4$}}\right)M + M\left( 3I_{\mbox{\tiny$4$}}\right) - \left( 2I_{\mbox{\tiny$4$}}\right)\left( 3I_{\mbox{\tiny$4$}}\right) \\
+		& = & M^2 -2 \left(I_{\mbox{\tiny$4$}}M\right) +3\left( M I_{\mbox{\tiny$4$}}\right) - 2\left( I_{\mbox{\tiny$4$}}\left( 3I_{\mbox{\tiny$4$}}\right)\right) \\
+		& = & M^2 - 2M  + 3M - 2\left(3\left( I_{\mbox{\tiny$4$}}I_{\mbox{\tiny$4$}}\right)\right) \\
+		& = & M^2 +M  - 6I_{\mbox{\tiny$4$}}  \\
+		
+		\end{array}\]
+		
+	
+	\end{enumerate}
+	
+\end{example}
+
+Example \ref{matrixmultex} illustrates some interesting features of matrix multiplication.  First note that in part 1, neither $A$ nor $B$ is the zero matrix, yet the product $AB$ is the zero matrix.  Hence, the the zero product property enjoyed by real numbers and scalar multiplication does not hold for matrix multiplication. Parts 2 and 3 introduce us to polynomials involving matrices.  The reader is encouraged to step back and compare our expansion of the matrix product $\left(M - 2I_{\mbox{\tiny$4$}}\right)\left(M + 3I_{\mbox{\tiny$4$}}\right)$ in part 3 with the product $(x-2)(x+3)$ from real number algebra.  
+
+
+\smallskip
+We have another operation on matrices, transpose.
+
+\begin{definition}[The transpose of a matrix] \label{transpose}
+Given an $m \times n$ matrix $A$, the \textbf{transpose} of $A$ (\textit{getransponeerde van $A$}) is the $n \times m$ matrix, denoted by $A^T$, whose columns are formed from the corresponding rows of $A$.
+\end{definition}
+
+
+\begin{example}
+Determine the transpose of the matrices below.
+\[ A = \left[ \begin{array}{rr} a & b  \\ c & d  \end{array} \right], \quad B = \left[ \begin{array}{rr} -5 & 2  \\ 1 & -3 \\ 0 & 4  \end{array} \right], \quad \text{and} \quad C = \left[ \begin{array}{rrrr} 1 & 1 & 1 & 1  \\ -3 & 5 & -2 & 7  \end{array} \right] \]
+
+
+
+\xhrulefill{gray}{2.5pt}Solution \xhrulefill{gray}{2.5pt}
+
+
+We have
+\[ A^T = \left[ \begin{array}{rr} a & c  \\ b & d  \end{array} \right], \quad B^T = \left[ \begin{array}{rrr} -5 & 1 & 0  \\ 2 & -3 & 4  \end{array} \right], \quad \text{and} \quad C^T = \left[ \begin{array}{rr} 1 & -3  \\ 1 & 5 \\ 1 & -2 \\ 1 & 7  \end{array} \right]. \]
+
+\end{example}
+
+
+\smallskip
+
+Also this operation has some important properties listed below.
+
+\begin{theorem}[Properties of the transpose of a matrix]
+Let $A$ and $B$ denote matrices whose sizes are appropriate for the following sums
+and products.
+\begin{enumerate}
+\item $(A^T)^T = A$
+\item $(A + B)^T = A^T + B^T$
+\item For any scalar $r$, $(rA)^T = r A^T$
+\item $(AB)^T$ = $B^T A^T$
+\end{enumerate}
+
+\end{theorem}
+
+\smallskip
+
+When we started this chapter, we mentioned that we would temporarily consider matrices as their own entities, but that the algebra developed here would ultimately allow us to solve systems of linear equations.  To that end, consider the system
+
+\[\left\{ \begin{array}{rcl} 3x  - y  + z & = & 8 \\ x +  2y  -  z & = & 4 \\  2x+ 3y - 4z & = & 10. \\  \end{array} \right.\]
+
+We can encode this system into the \textbf{augmented matrix} (\textit{uitgebreide matrix})
+
+
+\[\left[ \begin{array}{rrr|r} 3 & -1 & 1 & 8 \\ 1 & 2 & -1 & 4 \\ 2 & 3 & -4 & 10 \\ \end{array} \right].\]
+
+%\phantomsection
+
+%\label{systemasmatrixeqn}
+
+Recall that the entries to the left of the vertical line come from the coefficients of the variables in the system, while those on the right comprise the associated constants.  For that reason, we may form the \index{system of equations ! coefficient matrix} \textbf{coefficient matrix} $A$ (\textit{co\"effici\"entenmatrix}), the \index{system of equations ! unknowns matrix} \textbf{unknowns matrix} $X$  and the \index{system of equations ! constant matrix} \textbf{constant matrix} $B$ as below
+
+\[ A = \left[ \begin{array}{rrr} 3 & -1 & 1  \\ 1 & 2 & -1  \\ 2 & 3 & -4  \\ \end{array} \right],
+\quad
+X = \left[ \begin{array}{r}  x \\  y \\  z \\ \end{array} \right],\quad \text{ and } \quad
+B = \left[ \begin{array}{r}  8 \\  4 \\  10 \\ \end{array} \right].
+\]
+
+We now consider the matrix equation $AX = B$.
+
+\[ \begin{array}{rrcl}
+
+ & AX & = & B \\ [13pt]
+\Leftrightarrow & \left[ \begin{array}{rrr} 3 & -1 & 1  \\ 1 & 2 & -1  \\ 2 & 3 & -4  \\ \end{array} \right] \left[ \begin{array}{r}  x \\  y \\  z \\ \end{array} \right] & = & \left[ \begin{array}{r}  8 \\  4 \\  10 \\ \end{array} \right] \\ [13pt]
+\Leftrightarrow & \left[ \begin{array}{rrr} 3x -y +z  \\ x + 2y  -z  \\ 2x + 3y  -4 z \\ \end{array} \right] & = & \left[ \begin{array}{r}  8 \\  4 \\  10 \\ \end{array} \right] \\ [13pt]
+\end{array}\]
+
+We see that finding a solution $(x,y,z)$ to the original system corresponds to finding a solution $X$ for the matrix equation $AX = B$.  
+% If we think about solving the real number equation $ax = b$, we would simply `divide' both sides by $a$. Is it possible to `divide' both sides of the matrix equation $AX = B$ by the matrix $A$?    This is the central topic of Section \ref{MatMethods}. 
+
+
+
+
+
+\section{Determinants}
+
+%\subsection{Definition and properties of the determinant}
+In this section we assign to each square matrix $A$ a real number, called the \textbf{determinant} (\textit{determinant}) of $A$. The determinant is defined recursively, that is, we define it for $1 \times 1$ matrices and give a rule by which we can reduce determinants of $n \times n$ matrices to a sum of determinants of $(n-1) \times (n-1)$ matrices. This means we will be able to evaluate the determinant of a $2 \times 2$ matrix as a sum of the determinants of $1 \times 1$ matrices;  the determinant of a $3 \times 3$ matrix as a sum of the determinants of $2 \times 2$ matrices, and so forth.  To explain how we will take an $n \times n$ matrix and distill from it an $(n-1) \times (n-1)$, we use the following notation.
+
+\smallskip
+
+
+\begin{definition}[Matrix $A_{ij}$] \label{Aijdefn} 
+Given an $n \times n$ matrix $A$ where $n>1$, the matrix $A_{ij}$ is the $(n-1) \times (n-1)$ matrix formed by deleting the $i$th row of $A$ and the $j$th column of $A$. 
+\end{definition}
+
+
+\smallskip
+
+For example, using the matrix $A$ below, we find the matrix $A_{\mbox{\tiny$23$}}$ by deleting the second row and third column of $A$.
+
+\[ A = \left[ \begin{array}{rrr} 3 &  1 & 2 \\ 0 & -1 & 5 \\ 2 & 1 & 4 \\ \end{array} \right] \quad \xrightarrow{\text{Delete $R_2$ and $C_3$}} \quad
+A_{23} = \left[ \begin{array}{rr} 3 & 1 \\ 2 & 1 \\ \end{array} \right] 
+\]
+
+We are now in the position to define the determinant of a matrix.
+
+\smallskip
+
+\begin{definition}[Determinant of a matrix] \label{determinantdefn} \index{matrix ! determinant ! definition of} \index{determinant of a matrix ! definition of} 
+Given an $n \times n$ matrix $A$ the \textbf{determinant of \boldmath $A$} (\textit{determinant van $A$}), denoted $\det(A)$, is defined as follows
+		
+\begin{itemize}	
+	\item  If $n=1$, then $A = \left[ a_{\mbox{\tiny$11$}} \right]$ and $\det(A) = \det\left( \left[ a_{\mbox{\tiny$11$}} \right] \right) = a_{\mbox{\tiny$11$}}$.
+			
+	\item  If $n>1$, then $A = \left[ a_{ij} \right]$ and \[ \det(A) = \det\left( \left[ a_{ij} \right] \right) =  a_{\mbox{\tiny$11$}} \det\left(A_{\mbox{\tiny$11$}}\right)- a_{\mbox{\tiny$12$}} \det\left(A_{\mbox{\tiny$12$}}\right) +  \ldots  + (-1)^{1+n} a_{\mbox{\tiny$1$}n} \det\left(A_{\mbox{\tiny$1$}n}\right).\]
+			
+\end{itemize}
+		
+\end{definition}
+
+
+\smallskip
+
+There are two commonly used notations for the determinant of a matrix $A$: $\det(A)$ and $|A|$.
+In the expansion $a_{\mbox{\tiny$11$}} \det\left(A_{\mbox{\tiny$11$}}\right)- a_{\mbox{\tiny$12$}} \det\left(A_{\mbox{\tiny$12$}}\right) +  \ldots  + (-1)^{1+n} a_{\mbox{\tiny$1$}n} \det\left(A_{\mbox{\tiny$1$}n}\right)$, the notation '$+  \ldots  + (-1)^{1+n} a_{\mbox{\tiny$1$}n}$' means that the signs alternate and the final sign is dictated by the sign of the quantity $(-1)^{1+n}$. Since the entries $a_{\mbox{\tiny$11$}}$, $a_{\mbox{\tiny$12$}}$ and so forth up through $a_{\mbox{\tiny$1$}n}$ comprise the first row of $A$, we say we are finding the determinant of $A$  by `expanding along the first row'. Later in the section, we will develop a formula for $\det(A)$ which allows us to find it by expanding along any row.
+
+\smallskip
+
+For a generic $2 \times 2$ matrix $A = \left[ \begin{array}{cc} a & b \\ c & d \\ \end{array} \right]$ we get
+
+\[ \begin{array}{rcl} 
+
+\det(A) & = & \det \left( \left[ \begin{array}{cc}  a & b \\ c & d \\ \end{array} \right] \right)\\[13pt]
+& = &  a \det\left(A_{\mbox{\tiny$11$}}\right) - b \det\left(A_{\mbox{\tiny$12$}}\right) \\
+& = &  a \det\left(\left[ d \right]\right) - b \det\left(\left[c \right]\right) \\
+& = & ad-bc. \end{array}\]
+
+This formula is worth remembering.
+
+\smallskip
+
+Applying Definition \ref{determinantdefn} to the $3 \times 3$ matrix $A =  \left[ \begin{array}{rrr} 3 & 1 & \hphantom{-}2 \\ 0 & -1 & 5 \\ 2 & 1 & 4 \\ \end{array} \right]$ we obtain
+
+\[ \begin{array}{rcl} 
+
+\det(A) & = & \det \left( \left[ \begin{array}{rrr} 3 & 1 & \hphantom{-}2 \\ 0 & -1 & 5 \\ 2 & 1 & 4 \\ \end{array} \right] \right)\\[13pt]
+& = & 3\det\left(A_{\mbox{\tiny$11$}}\right) - 1\det\left(A_{\mbox{\tiny$12$}}\right) + 2\det\left(A_{\mbox{\tiny$13$}}\right) \\[13pt]
+& = & 3\det \left( \left[ \begin{array}{rr} -1 & 5 \\ 1 & 4 \\ \end{array} \right] \right) - \det \left( \left[ \begin{array}{rr} 0 & 5 \\ 2 & 4 \\ \end{array} \right] \right) + 2 \det \left( \left[ \begin{array}{rr} 0 & -1 \\ 2 & 1 \\ \end{array} \right] \right) \\[13pt]
+& = & 3((-1)(4) - (5)(1)) - ((0)(4)-(5)(2))+2((0)(1)-(-1)(2)) \\
+& = & 3(-9)-(-10)+2(2) \\
+& = & -13. \\ \end{array}  \]
+
+To evaluate the determinant of a $4 \times 4$ matrix, we would have to evaluate the determinants of four $3 \times 3$ matrices, each of which involves the finding the determinants of three $2 \times 2$ matrices. As you can see, our method of evaluating determinants quickly gets out of hand and many of you may be reaching for the calculator.  There is some mathematical machinery which can assist us in calculating determinants and we present that here.  Before we state the theorem, we need some more terminology.
+
+\smallskip
+
+\begin{definition}[Minor - Cofactor]  \label{minorcofactordefn} Let $A$ be an $n \times n$ matrix and $A_{ij}$ be defined as in Definition \ref{Aijdefn}.  The\index{matrix ! minor}\index{minor} \textbf{\boldmath $ij$ minor} (\textit{minor}) of $A$, denoted $M_{ij}$ is defined by $M_{ij} = \det\left(A_{ij}\right)$. The\index{matrix ! cofactor}\index{cofactor} \textbf{\boldmath $ij$ cofactor} (\textit{cofactor}) of $A$, denoted $\mathcal{C}_{ij}$ is defined by $\mathcal{C}_{ij} = (-1)^{i+j}M_{ij} = (-1)^{i+j}\det\left(A_{ij}\right)$. 
+\end{definition}
+
+\smallskip
+
+We note that in Definition \ref{determinantdefn}, the sum 
+
+\[a_{\mbox{\tiny$11$}} \det\left(A_{\mbox{\tiny$11$}}\right)- a_{\mbox{\tiny$12$}} \det\left(A_{\mbox{\tiny$12$}}\right) +  \ldots  + (-1)^{1+n} a_{\mbox{\tiny$1$}n} \det\left(A_{\mbox{\tiny$1$}n}\right)\]
+
+can be rewritten as
+
+\[a_{\mbox{\tiny$11$}} (-1)^{1+1} \det\left(A_{\mbox{\tiny$11$}}\right) + a_{\mbox{\tiny$12$}} (-1)^{1+2} \det\left(A_{\mbox{\tiny$12$}}\right) + \ldots  + a_{\mbox{\tiny$1$}n} (-1)^{1+n} \det\left(A_{\mbox{\tiny$1$}n}\right)\]
+
+which, in the language of cofactors, is
+
+\[a_{\mbox{\tiny$11$}} \mathcal{C}_{\mbox{\tiny$11$}} + a_{\mbox{\tiny$12$}}\mathcal{C}_{\mbox{\tiny$12$}} + \ldots  + a_{\mbox{\tiny$1$}n}\mathcal{C}_{\mbox{\tiny$1$}n}. \]
+
+We are now ready to state our main theorem concerning determinants.
+
+\smallskip
+
+\begin{theorem}[Properties of the determinant] \label{determinantprops} 
+Suppose an $n \times n$ matrix $A = \left[a_{ij}\right]$. \index{determinant of a matrix ! properties of} \index{matrix ! determinant ! properties of}
+		
+\begin{itemize}
+			
+\item  We may find the determinant by expanding along any row.  That is, for any $1 \leq k \leq n$, 
+			
+\[\det(A) = a_{k\mbox{\tiny$1$}}\mathcal{C}_{k\mbox{\tiny$1$}} +  a_{k\mbox{\tiny$2$}}\mathcal{C}_{k\mbox{\tiny$2$}} + \ldots + a_{kn} \mathcal{C}_{kn}\]
+			
+\item  If $A'$ is the matrix obtained from $A$ by:
+			
+\begin{itemize}
+				
+		\item interchanging any two rows, then $\det(A')=-\det(A)$.
+				
+		\item  replacing a row with a nonzero multiple (say $c$) of itself, then $\det(A')=c\det(A)$.
+				
+		\item  replacing a row with itself plus a multiple of another row, then $\det(A')=\det(A)$.
+				
+\end{itemize}
+			
+			\item  If $A$ has two identical rows, or a row consisting of all $0$'s, then $\det(A) = 0$.
+			
+			%\item  If $A$ is upper or lower triangular, then $\det(A)$ is the product of the entries on the main diagonal.
+			
+			\item  If $B$ is an $n \times n$ matrix, then $\det(AB) = \det(A) \det(B)$.
+			
+			\item  $\det\left(A^{n}\right) = \det(A)^{n}$ for all $n \in \mathbb{R}_0$.
+			
+			%\item  $A$ is invertible if and only if $\det(A) \neq 0$.  In this case, $\det\left(A^{-1}\right) = \dfrac{1}{\det(A)}$.
+			
+		\end{itemize}
+		
+\end{theorem}
+	
+
+\smallskip
+
+Let us demonstrate some of the properties listed in Theorem \ref{determinantprops} on the matrix $A$ below.
+
+\[A =  \left[ \begin{array}{rrr} 3 & 1 & \hphantom{-}2 \\ 0 & -1 & 5 \\ 2 & 1 & 4 \\ \end{array} \right] \]
+
+We found $\det(A) = -13$ by expanding along the first row.  To take advantage of the $0$ in the second row, we use Theorem \ref{determinantprops}to find $\det(A) = -13$ by expanding along that row.
+
+\[ \begin{array}{rcl} 
+
+\det \left( \left[ \begin{array}{rrr} 3 & 1 & \hphantom{-}2 \\ 0 & -1 & 5 \\ 2 & 1 & 4 \\ \end{array} \right] \right)& = & 0\mathcal{C}_{\mbox{\tiny$21$}} + (-1)\mathcal{C}_{\mbox{\tiny$22$}}+5\mathcal{C}_{\mbox{\tiny$23$}} \\
+
+& = &  (-1) (-1)^{2+2} \det\left(A_{\mbox{\tiny$22$}}\right) + 5 (-1)^{2+3}\det\left(A_{\mbox{\tiny$23$}}\right) \\[13pt]
+
+& = & - \det \left( \left[ \begin{array}{rr} 3 & 2 \\ 2 & 4 \\ \end{array} \right] \right) -5 \det \left( \left[ \begin{array}{rr} 3 & 1 \\ 2 & 1 \\ \end{array} \right] \right) \\[13pt]
+& = & -((3)(4)-(2)(2)) - 5((3)(1)-(2)(1)) \\
+& = & -8-5 \\
+& = & -13. \\ \end{array}  \]
+
+In general, the sign of $(-1)^{i+j}$ in front of the minor in the expansion of the determinant follows an alternating pattern. Below is the pattern for $2 \times 2$, $3 \times 3$ and $4 \times 4$ matrices, and it extends naturally to higher dimensions.  
+
+\[ \begin{array}{ccc}
+
+\left[ \begin{array}{cc} + & - \\ - & + \\ \end{array} \right] 
+
+&
+\qquad 
+
+\left[ \begin{array}{ccc} + & - & + \\ - & + & - \\ + & - & +  \end{array} \right] 
+
+
+&
+
+\qquad
+
+\left[ \begin{array}{cccc} + & - & + & - \\ - & + & - & +\\ + & - & + & - \\ - & + & - & + \end{array} \right] 
+
+\end{array} \]
+
+The reader is cautioned, however, against reading too much into these sign patterns.  In the example above, we expanded the $3 \times 3$ matrix $A$ by its second row and the term which corresponds to the second entry ended up being negative even though the sign attached to the minor is $(+)$.  These signs represent only the signs of the $(-1)^{i+j}$ in the formula;  the sign of the corresponding entry as well as the minor itself determine the ultimate sign of the term in the expansion of the determinant.
+
+\smallskip
+
+To illustrate some of the other properties in  Theorem \ref{determinantprops}, we use row operations to transform our $3 \times 3$ matrix $A$ into an upper triangular matrix, keeping track of the row operations, and labeling each successive matrix.
+
+
+\[ \begin{array}{ccccc}
+
+\left[ \begin{array}{rrr} 
+3 &  1 & \hphantom{-}2 \\ 
+0 & -1 & 5 \\ 
+2 & 1 & 4 \\ 
+\end{array} \right]
+
+&
+\xrightarrow[\text{with $-\frac{2}{3}R_1+R_3$}]{\text{Replace $R_3$}}
+&
+
+\left[ \begin{array}{rrr} 
+3 &  1 & \hphantom{-}2 \\ 
+0 & -1 & 5 \\
+0 & \frac{1}{3} & \frac{8}{3} \\ 
+\end{array} \right]
+&
+\xrightarrow[\text{$\frac{1}{3}R_2+R_3$}]{\text{Replace $R_3$ with}}
+&
+
+\left[ \begin{array}{rrr} 
+3 &  1 & 2 \\ 
+0 & -1 & 5 \\
+0 & 0 & \frac{13}{3} \\ 
+\end{array} \right] \\
+
+A & & B & & C \\
+
+\end{array}\]
+
+Theorem \ref{determinantprops} guarantees us that $\det(A) = \det(B) = \det(C)$ since we are replacing a row with itself plus a multiple of another row moving from one matrix to the next.  Furthermore, since $C$ is upper triangular, $\det(C)$ is the product of the entries on the main diagonal, in this case  $\det(C) = (3)(-1)\left(\frac{13}{3}\right) = -13$.  This demonstrates the utility of using row operations to assist in calculating determinants.  
+
+
+
+
+
+\section{Exercises}
+\begin{enumerate}
+
+\item Bepaal,
+	\begin{multicols}{3}
+		\begin{itemize}
+			\item $3A$
+			\item $A-2B$
+			\item $-B$
+			\item $AB$
+			\item $BA$
+			\item $A^2$
+		\end{itemize}
+	\end{multicols}	
+	indien mogelijk, voor elk gegeven paar matrices $A$ en $B$. %Precalculus matrix arithmetic  Oef 1, 3, 5, 6
+	\begin{multicols}{2}
+		\begin{enumerate}
+			\item $A =\begin{bmatrix} 2 & -3 \\1 & 4  \end{bmatrix}, \quad B=\begin{bmatrix} 5 & -2 \\ 4 & 8  \end{bmatrix} $ 
+			\item $A =\begin{bmatrix} -1 & 3 \\5 & 2  \end{bmatrix}, \quad B=\begin{bmatrix} 7 & 0 & 8 \\ -3 & 1 & 4  \end{bmatrix} $ 
+			\item $A =\begin{bmatrix} 7 \\ 8 \\ 9  \end{bmatrix}, \quad B=\begin{bmatrix} 1 & 2 & 3 \end{bmatrix} $ 
+			\item $A =\begin{bmatrix} 1 & -2 \\ -3 & 4 \\ 5 & -6  \end{bmatrix}, \quad B=\begin{bmatrix} -5 & 1 & 8  \end{bmatrix} $ 	
+		\end{enumerate}
+	\end{multicols}
+	
+\item Gebruik de gegeven matrices 
+\[ A =\begin{bmatrix} 1 & 2 \\ 3 & 4  \end{bmatrix}, \quad B=\begin{bmatrix} 0 & -3 \\ -5 & 2  \end{bmatrix}, \quad C= \begin{bmatrix} 10 & -\dfrac{11}{2} & 0 \\ \dfrac{3}{5} & 5 & 9  \end{bmatrix},\quad  D =\begin{bmatrix} 7 & -13 \\ -\dfrac{4}{3} & 0 \\ 6 & 8  \end{bmatrix} \quad \text{ en } \quad E=\begin{bmatrix} 1 & 2 & 3 \\ 0 & 4 & -9 \\ 0& 0 & -5  \end{bmatrix}\]
+om, indien mogelijk, het onderstaande te bepalen.%Precalculus matrix arithmetic  Oef 11-15, 19
+\begin{multicols}{3}
+	\begin{itemize}
+		\item $E+D$
+		\item $ED$
+		\item $CD+2I_2A$
+		\item $A-4I_2$
+		\item $A^2-B^2$
+		\item $EDC$
+	\end{itemize}
+\end{multicols}	
+    
+    	
+\item Bepaal de onbekenden $a$, $b$ en $c$ in de onderstaande gelijkheden.
+ \begin{enumerate}
+ \item $\begin{bmatrix}
+ 2      &a \\
+ c      &0
+ \end{bmatrix} + \begin{bmatrix}
+ 3      &-b \\
+ 0      &\sqrt{3}
+ \end{bmatrix} = \begin{bmatrix}
+ a+b    &-3 \\
+ 2c     &\sqrt{3}
+ \end{bmatrix}$
+ \item []
+ \item $\begin{bmatrix} a+b & a-b  & -3\end{bmatrix} + c \begin{bmatrix} 0&0&1\end{bmatrix} = c \begin{bmatrix} 3&-1&0\end{bmatrix}$
+ 
+ \item []
+ 
+ \item $\begin{bmatrix}
+ \frac{1}{2}      & \sqrt{5} \\
+ -3a     & b \\
+ 5    & -2
+ \end{bmatrix} + \begin{bmatrix}
+\frac{1}{3}      & \sqrt{5} \\
+-b     & 1 \\
+2    & 2
+ \end{bmatrix} = \begin{bmatrix}
+ c     & 2\sqrt{5} \\
+-\frac{1}{2}    & 3b \\
+7    & 0
+ \end{bmatrix}$
+ 
+ 
+ \end{enumerate}
+
+
+\item Los de onderstaande matrixvergelijkingen op.
+
+\begin{enumerate}
+	\item $X - \begin{bmatrix}	2  & 3 \\ 0  &1 \end{bmatrix} = \begin{bmatrix}	3  & 5 \\ 1  & 2 \end{bmatrix} + \begin{bmatrix}	6  & -3 \\ 1  & 4 \end{bmatrix} $ \\[0.2cm] 
+	\item $\begin{bmatrix}	-2  & -1 & 1 \\  5 & 0 & 1 \end{bmatrix} - 3X = \begin{bmatrix}	4  & 8 & 2 \\ 2  & 6 & 0 \end{bmatrix}  $\\[0.2cm] 
+	\item $3 \begin{bmatrix} 1 & -1 & 1 & 1 \\  2 & 0 & 0 & 1  \\ 4 & 2 & 0 & 2\end{bmatrix} + \dfrac{1}{2}X = 5\begin{bmatrix} 6 & 0 & 2 & 6 \\  1 & 0 & 3 & 10  \\ 0 & 1 & 4 & 1\end{bmatrix} $ 
+	
+\end{enumerate}
+
+	
+\item Verifieer de associatieve eigenschap en de distributieve eigenschap voor de vermenigvuldiging over de optelling met de drie onderstaande matrices
+\[A=\begin{bmatrix}
+1       &0      &-1 \\
+2       &3      &a
+\end{bmatrix},\qquad B=\begin{bmatrix}
+b       &1      &0 \\
+-1      &-2     &3
+\end{bmatrix}\qquad \text{ en } \qquad C=\begin{bmatrix}
+0       &-1 \\
+1       &3  \\
+2       &-1
+\end{bmatrix}.\]
+
+
+\item $A$ en $B$ zijn matrices over $\mathbb{R}$. Wanneer is het volgende geldig?
+\begin{align*}
+&(A \pm B)^2=A^2\pm 2A.B+B^2\\
+&(A-B)(A+B)=A^2-B^2
+\end{align*}
+
+\item Bewijs dat $A^3-2A^2-9A=0$ voor de matrix
+\[A=\begin{bmatrix}
+2       &1      &3 \\
+1       &-1     &2 \\
+1       &2      &1
+\end{bmatrix}.\]
+
+\item Bereken $(AB)^T$ als
+\[A=\begin{bmatrix}
+2       &1      &4 \\
+1       &1      &1 \\
+2       &1      &3 \\
+1       &4      &9
+\end{bmatrix}\qquad\mbox{en}\qquad B=\begin{bmatrix}
+2       &8      &3 \\
+0       &1      &2 \\
+2       &1      &5
+\end{bmatrix}.\]
+
+
+\item Beschouw de volgende definities. Een vierkante matrix is een \textbf{bovendriehoeksmatrix} als alle elementen onder de hoofddiagonaal nul zijn. Een vierkante matrix wordt daarentegen een \textbf{benedendriehoeksmatrix} genoemd als alle elementen boven de hoofddiagonaal nul zijn. Beantwoord de volgende vragen.
+\begin{enumerate}
+	\item Geef een voorbeeld van een matrix die noch een boven- noch een benedendriehoeksmatrix is. 
+	\item Is het product van twee $n \times n$ bovendriehoeksmatrices altijd een bovendriehoeksmatrix?
+	\item Is het product van twee $n \times n$ benedendriehoeksmatrices altijd een benedendriehoeksmatrix?
+\end{enumerate}
+
+%
+%\begin{enumerate}
+%	\setcounter{enumi}{\value{HW}}
+%	
+%	\item Give an example of a matrix which is neither upper triangular nor lower triangular. \label{triangexfirst} 
+%	\item Is the product of two $n \times n$ upper triangular matrices always upper triangular?
+%	\item Is the product of two $n \times n$ lower triangular matrices always lower triangular?
+
+%\item Een vierkante matrix $A$ wordt {\bf nulpotent} genoemd als er een $p\in \IN_0$ bestaat waarvoor geldt dat $A^p=0$. Is $p$ het kleinste element in $\IN_0$ waarvoor dit geldt, dan noemen we deze matrix {\bf nulpotent met index $\boldm{p}$}. Bewijs dat 
+%\[ A=\begin{bmatrix}
+%1       &1      &3 \\
+%5       &2      &6 \\
+%-2      &-1     &-3
+%\end{bmatrix}\] 
+%nulpotent is met index $4$.
+%
+\item
+%\begin{enumerate}
+% \item 
+Een vierkante matrix $A$ wordt {\bf periodiek} genoemd als er een $p\in\mathbb{N}_0$ bestaat waarvoor geldt dat $A^{p+1}=A$. Is $p$ het kleinste element in $\mathbb{N}_0$ waarvoor dit geldt, dan wordt $p$ de {\bf periode} van de matrix genoemd. 
+Bewijs dat 
+\[A=\begin{bmatrix}
+ 1      &-2     &-6 \\
+ -3     &2      &9 \\
+ 2      &0      &-3
+ \end{bmatrix}\]
+periodiek is met periode $2$.
+ 
+%\item
+%\begin{enumerate}
+%\item Een vierkante matrix $A$ waarvoor $A^2=A$ noemen we {\bf idempotent}. 
+% Bewijs dat 
+%\[A=\begin{bmatrix}
+% 2      &-3     &-5 \\
+% -1     &4      &5 \\
+% 1      &-3     &-4
+% \end{bmatrix}\]
+%idempotent is. 
+%\item Bewijs dat matrices $A,B \in K^{n,n}$ waarvoor geldt dat $AB=A$ en $BA=B$ idempotent zijn.
+% 
+%\item Is $A\in K^{n,n}$ idempotent, bewijs dan dat $B=I_n-A$ ook idempotent is en dat $AB=BA=0$.
+%\end{enumerate}
+
+\item Een vierkante matrix $A$ waarvoor %$A^{-1}=A$ of 
+$A^2=I_n$ wordt {\bf involutorisch} genoemd. 
+Bewijs dat 
+\[ A=\begin{bmatrix}
+0       &1      &-1 \\
+4       &-3     &4 \\
+3       &-3     &4
+\end{bmatrix}\]
+een involutorische matrix is.
+
+
+
+\item Toon aan dat voor de matrices
+\[ A=\begin{bmatrix}
+1       &2 \\
+2       &4
+\end{bmatrix}, \qquad B=\begin{bmatrix}
+1       &2      &-1 \\
+1       &1      &0
+\end{bmatrix}  \qquad\mbox{en}\qquad C=\begin{bmatrix}
+-1      &0      &0 \\
+2       &2      &-1/2
+\end{bmatrix}\]
+$AB=AC$ hoewel $B\neq C$.
+
+
+\item Toon aan dat $AB=0$ en $BA\neq 0$ voor de matrices
+\[ A=\begin{bmatrix}
+1       &2 \\
+2       &4
+\end{bmatrix}\qquad \mbox{en}\qquad B=\begin{bmatrix}
+2       &4 \\
+-1      &-2
+\end{bmatrix}.\]
+
+
+
+
+
+\item Bereken de determinant van de gegeven matrices.
+\begin{multicols}{3}
+\begin{enumerate}
+\item $A = \begin{bmatrix}
+12 & -7 \\ -5 & 3
+\end{bmatrix}$	%Precalculus Determinants oef 1
+
+\item $B = \begin{bmatrix}
+6 & 15 \\ 14 & 35
+\end{bmatrix}$	%Precalculus Determinants oef 2
+
+\item $C = \begin{bmatrix}
+x & x^2 \\ 1 & 2x
+\end{bmatrix}$	%Precalculus Determinants oef 3
+	
+\item $D = \begin{bmatrix}
+4       &3 & 2 \\
+3       &5 & 2 \\
+2       &2 & 1
+\end{bmatrix}$
+
+\item $E = \begin{bmatrix}
+1       &2 & 3 \\
+2       &3 & 4 \\
+3       &4 & 7
+\end{bmatrix}$
+
+\item $F = \begin{bmatrix}
+4 & 6 & -3 \\ 3 & 4 & -3 \\1 & 2 & 6
+\end{bmatrix}$	%Precalculus Determinants oef 5
+
+\item $G = \begin{bmatrix}
+1       &2 & 3 &4 \\
+5      &6 & 7 & 8 \\
+9       &0 & 1 & 2
+\end{bmatrix}$
+\item $H = \begin{bmatrix}
+2       &1 & -4 &4 \\
+1      &3 & 2 & 1 \\
+6       &2 & 3 & 4 \\
+-1       &-7 & 2 & 8 
+\end{bmatrix}$
+
+\end{enumerate}
+\end{multicols}
+
+\item Beschouw de matrices
+\[ R=\begin{bmatrix}
+-7 & 3 \\ 11 & 2
+\end{bmatrix}, \quad S=\begin{bmatrix}
+1 & -5 \\ 6 & 9
+\end{bmatrix}, \quad T = \begin{bmatrix}
+11 & 2 \\ -7 & 3
+\end{bmatrix}, \quad \text{en} \quad U = \begin{bmatrix}
+-3 & 15 \\ 6 & 9
+\end{bmatrix}.  \]
+Toon aan dat 
+\begin{enumerate}
+	\item det$(RS) = $det$(R)$ det$(S)$,
+	\item det$(T) = $-det$(R)$,
+	\item det$(U) = -3$ det$(S)$.
+\end{enumerate}
+
+\item Leg uit waarom de determinant van de matrices $M$, $N$ en $P$ gelijk is aan nul.
+\[M=\begin{bmatrix}
+1 & 2 & 3 \\ 0 & 0 & 0 \\ 7 & 8 & 9
+\end{bmatrix}, \quad N=\begin{bmatrix}
+1 & 2 & 3 \\ 1 & 2 & 3 \\ 4 &5 & 6
+\end{bmatrix} \quad \text{ en } \quad P = \begin{bmatrix}
+1 & 2 & 3 \\ -2 & -4 & -6\\ 7 & 8 & 9
+\end{bmatrix}  \]
+
+
+\item Toon de volgende gelijkheden aan.
+\begin{enumerate}
+ %\item $\left|\begin{array}{ccc}
+ %2u_1u_2        &u_1v_2+u_2v_1  &u_1w_2+u_2w_1 \\
+ %u_1v_2+u_2v_1  &2v_1v_2        &v_1w_2+v_2w_1 \\
+ %u_1w_2+u_2w_1  &v_1w_2+v_2w_1  &2w_1w_2
+ %\end{array}\right|=0$
+ %\item $\left|\begin{array}{ccccc}
+ %-4     &1      &1      &1      &1 \\
+ %1      &-4     &1      &1      &1 \\
+ %1      &1      &-4     &1      &1 \\
+ %1      &1      &1      &-4     &1 \\
+ %1      &1      &1      &1      &-4
+% \end{array}\right|=0$
+\item $\left|\begin{array}{ccc}
+ 1      &a      &b+c \\
+ 1      &b      &a+c \\
+ 1      &c      &a+b
+ \end{array}\right|=0$
+ %\item $\left|\begin{array}{cccc}
+ %a      &b      &c      &d  \\
+ %-b     &a      &-d     &c  \\
+ %-c     &d      &a      &-b \\
+ %-d     &-c     &b      &a
+ %\end{array}\right| =(a^2+b^2+c^2+d^2)^2$
+ \item $\left|\begin{array}{cccc}
+ x      &a      &b      &c \\
+ a      &x      &b      &c \\
+ a      &b      &x      &c \\
+ a      &b      &c      &x
+ \end{array}\right|=(x+a+b+c)(x-a)(x-b)(x-c)$
+ %\item $\left|\begin{array}{cccc}
+ %x      &a      &b      &c \\
+ %c      &x      &a      &b \\
+ %b      &c      &x      &a \\
+ %a      &b      &c      &x
+ %\end{array}\right|=(x+a+b+c)(x+b-a-c)[(x-b)^2+(a-c)^2]$
+ \item $\left|\begin{array}{cccc}
+ a      &a      &a      &a \\
+ a      &b      &b      &b \\
+ a      &b      &c      &c \\
+ a      &b      &c      &d
+ \end{array}\right|=a(b-a)(c-b)(d-c)$
+ %\item $\left|\begin{array}{cccc}
+ %0      &a      &b      &c \\
+ %a      &0      &c      &b \\
+ %b      &c      &0      &a \\
+ %c      &b      &a      &0
+ %\end{array}\right| =(a+b+c)(a-c-b)(c-b-a)(b-a-c)$
+ %\item $\left|\begin{array}{cccc}
+ %a      &x      &x      &b \\
+ %x      &a      &b      &x \\
+ %x      &b      &a      &x \\
+ %b      &x      &x      &a
+ %\end{array}\right|=(a-b)^2[(a+b)^2-4x^2]$
+ %\item $\left|\begin{array}{ccc}
+ %a+b    &c      &c \\
+ %a      &b+c    &a \\
+ %b      &b      &c+a
+ %\end{array}\right|=4\;abc$
+ %\item $\left|\begin{array}{cccc}
+ %1      &a      &a^2    &a^3 \\
+ %0      &1      &2a     &3a^2 \\
+ %1      &b      &b^2    &b^3 \\
+ %0      &1      &2b     &3b^2
+ %\end{array}\right|=(b-a)^4$
+ \end{enumerate}
+%%
+%%\item Bewijs dat een anti-symmetrische matrix van oneven orde singulier is.
+%%
+%%\item Toon aan dat
+%%\[|\mbox{adj}(A) |=|A|^{n-1}.\]
+%%
+%%\item Toon aan dat
+%%\[\mbox{adj}(\mbox{adj}(A) )=|A|^{n-2} A.\]
+
+\end{enumerate}

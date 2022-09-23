@@ -1,0 +1,869 @@
+\chapter{Calculus in Mathematica and Wolfram$\mid$Alpha}
+\label{PC-Lab 1}
+\graphicspath{{figures/Mathematica/}}
+The methods given in this course can be used to solve mathematical problems with pen and paper, but in practice this only works for relatively simple problems that require little computation, such as those covered in the board exercise sessions. Today, however, we usually leave the repetitive work to computers, which are specially designed to perform a huge number of calculations in a very short time.
+
+Here we use Wolfram Mathematica (or Mathematica for short) and Wolfram$\mid$Alpha. Mathematica is a so-called computer algebra system capable of performing symbolic mathematical calculations on the computer. Wolfram$\mid$Alpha is freely accessible online at the following url: \url{https://www.wolframalpha.com/} and uses the same syntax as Mathematica, but is limited in available computation time.  You can use both Mathematica and and Wolfram$\mid$Alpha to solve complex problems, but also to support and check your calculations when solving problems with pen and paper. First we give an introduction to using Mathematica, then we discuss in detail how Mathematica can be used to (help) solve calculus problems. For more extensive documentation, we refer you to the Mathematica Documentation Centre (you can find it under Help > Documentation).
+
+\section{Mathematica Notebooks}
+Mathematica uses so-called Notebooks, denoted by the .nb extension, an interactive document containing both formatted text and code. This document is structured in what are known as \textbf{cells}, indicated by straight brackets on the right side of the notebook. To create a new cell, move your cursor below/above one or between two existing cell(s) and start typing.
+Each cell has a particular style, which defines its properties and formatting. This style can be changed by right-clicking on the cell and then under Styles selecting the desired style. We give a brief overview of the most commonly used cell styles.
+
+\subsection{Input cell}
+When we create a new cell in the Mathematica notebook, the default cell style is \textbf{Input}. In these cells we can enter mathematical operations, which can be performed with \keystroke{Shift}+\keystroke{Enter}. If the computation time gets too high (which often indicates a bug in the code), the evaluation can be aborted by pressing keystroke{Alt} + keystroke{.} or in the menu bar via Evaluation > Abort Evaluation. The result of the evaluated Input cell is written out to a linked Output cell, which appears below it.
+
+\begin{mdframed}[backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[]{Input}
+		1+1
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		2
+	\end{mmaCell}
+\end{mdframed}
+
+\subsection{Text and layout}
+\textbf{Text} cells contain formatted text and are used to provide explanations for the notebook. In addition, there are numerous cell types that help structure the notebook. Cell types such as \textbf{Title}, \textbf{Chapter}, \textbf{Section}\ldots are arranged according to a clear hierarchy, where cell types higher up the ladder (e.g. Title), include all subordinate cell types (e.g. Section, Text and Input). This group of cells is indicated by a straight bracket on the right side of the document and can be closed with a double-click so that only the cell with the highest rank is shown. 
+
+\section{Mathematica for dummies}
+\label{sec:MathematicaTutorial}
+This section goes over the basics of the Mathematica language. Feel free to modify the following examples or experiment on your own! If something is unclear, you can consult the Documentation Centre via the Help menu in the taskbar at the top of the document or via a right-click at the level of a specific command.
+
+\subsection{Operations, evaluations and lists}
+\subsubsection{Mathematical and realtional operations}
+
+\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+	$+$ , $-$, $*$, $/$, $\wedge$	&	Basic mathematical operators: sum, difference, multiplication, division, exponentiation\\
+	$==,!=,>,>=,<,=<$	& relational operators: (un)equality, bigger than (or equal to), less than (or equal to)\\
+	()				&	brackets to group operations\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+Below we illustrate the use of some of these operators. 
+
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[]{Input}
+		(10-5)*2\^{}3
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		40
+	\end{mmaCell}
+
+
+	\begin{mmaCell}[]{Input}
+		1 < 2 <= 3
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		True
+	\end{mmaCell}
+
+
+	\begin{mmaCell}[]{Input}
+		5/2 == 10/3
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		False
+	\end{mmaCell}
+\end{mdframed}
+
+
+\subsubsection{Evaluation of expressions}
+
+\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+	\textit{expr} 			&	the exact result is shown in an Output cell below after executing the expression \textit{expr} \\
+	\textit{expr}//N or N[\textit{expr}]	&	the numerical (approximate) result is given after executing the expression expr \\
+	N[\textit{expr},\textit{n}]			&	the numerical (approximate) result is given after executing the expression expr;
+	With a precision of \textit{n} significant numbers in the Output cell\\
+	\textit{expr}; 			&	the result is not displayed after executing the expression  \textit{expr} \\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+%
+%\begin{mdframed}[backgroundcolor=gray!40,roundcorner=8pt]
+%\textbf{Voorbeelden}
+%	\begin{mmaCell}[]{Input}
+%		144/14
+%	\end{mmaCell}
+%	\begin{mmaCell}[]{Output}
+%		\mmaFrac{72}{7}
+%	\end{mmaCell}
+%
+%
+%	\begin{mmaCell}[]{Input}
+%		144/14//N
+%	\end{mmaCell}
+%	\begin{mmaCell}[]{Output}
+%		10.2857
+%	\end{mmaCell}
+%	
+%	
+%	\begin{mmaCell}[]{Input}
+%		N[144/14, 2]
+%	\end{mmaCell}
+%	\begin{mmaCell}[]{Output}
+%		10.
+%	\end{mmaCell}
+%
+%\end{mdframed}
+
+\subsubsection{Assignements}
+\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+	\textit{x} = \textit{value}		&	direct assignement (\textit{x} will from now on always be replaced by \textit{value})\\
+	\textit{x}=\textit{y}=\textit{value}		&	Assume \textit{x} and \textit{y} both equal to \textit{value}\\
+	\textit{x}=. or Clear[x]		&	deletes the value assigned to \textit{x}\\
+	\textit{expr} /. \textit{x} -> \textit{value}	&	replace all \textit{x}'s in the expression \textit{expr} by value\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+It should be noted that \textit{value} need not be a scalar value, but can equally be a symbolic expression.
+In the last expression, the order to assign is indicated by /. and \textit{x} -> \textit{value} is the rule that determines what should be replaced (the so-called. \textbf{replacement rule}).
+
+We illustrate all this in the example below. 
+
+\begin{example}
+Save the expression $xy^2-2x(1+y^{-1})$ in the variable 	 \lstinline{expr}:
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[]{Input}
+		expr =  x*y^2-2*x(1+1/y)
+	\end{mmaCell}
+	\begin{mmaCell}[moredefined={expr}]{Output}
+		-2x( 1+\mmaFrac{1}{y} ) + x\mmaSup{y}{2}
+	\end{mmaCell}
+\end{mdframed}	
+Exact and numerical evaluation of \lstinline{expr}, voor $x=y=1/3$, by direct assignment:
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[moredefined={expr}]{Input}
+		x = y = 1/3;
+		expr
+	\end{mmaCell}
+	\begin{mmaCell}[moredefined={expr}]{Output}
+		-\mmaFrac{71}{27}
+	\end{mmaCell}
+	
+	\begin{mmaCell}[moredefined={expr}]{Input}
+		expr // N
+	\end{mmaCell}
+	\begin{mmaCell}[moredefined={expr}]{Output}
+		-2.62963
+	\end{mmaCell}
+
+	\begin{mmaCell}[moredefined={expr}]{Input}
+		N[expr,2]
+	\end{mmaCell}
+	\begin{mmaCell}[moredefined={expr}]{Output}
+		-2.6
+	\end{mmaCell}
+\end{mdframed}
+Evaluation of \lstinline{expr}, for $x=3, y=2$ and $x= uv , y = u^2$, by exchange:
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[moredefined={expr}]{Input}
+		Clear[x, y];
+		expr/.\{x->3, y->2\}
+		expr/.\{x->u*v, y->u^2\}
+		expr  
+	\end{mmaCell}
+	\begin{mmaCell}[moredefined={expr}]{Output}
+		3
+	\end{mmaCell}
+	\begin{mmaCell}[moredefined={expr}]{Output}
+		-2( 1+\mmaFrac{1}{\mmaSup{u}{2}} )uv + \mmaSup{u}{5}v
+	\end{mmaCell}
+	\begin{mmaCell}[moredefined={expr}]{Output}
+		-2x( 1+\mmaFrac{1}{y} ) + x\mmaSup{y}{2}
+	\end{mmaCell}
+\end{mdframed}
+\end{example}
+
+\subsubsection{Lijsten}
+Often we want to work with several objects (values, functions ...) at the same time. This can be done by using lists:
+
+\begin{tabular}{>{\hfill}p{6cm}p{11cm}}
+	List[e1, e2, ... ] of $\{$e1, e2, \ldots$\}$			&	ordered sequence of elements e1, e2 \ldots\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+Note that these elements can also be Lists themselves. Lists of lists are called \textbf{nested lists}. Lists can be used to pass multiple arguments to functions (see below), but can also be considered vectors.We can select elements from a list. For example, consider the vector v, then 
+
+\begin{tabular}{>{\hfill}p{6cm}p{11cm}}
+	\textit{v}[[\textit{k}]]		&		element \textit{k} in \textit{v} \\
+	%\textit{m}[[\textit{i,j}]]		&		element op de \textit{i}-de rij en \textit{j}-de kolom van \textit{m}\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+
+\begin{example}
+
+Create the vector $\vec{v}_1=\begin{bmatrix}1\quad2\quad3\end{bmatrix}^T$ and select the first element.
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[]{Input}
+		v1 = \{1, 2, 3\};
+		First[v1]
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		1
+	\end{mmaCell}
+\end{mdframed}
+\end{example}
+
+\subsection{Functions}
+\textbf{Functions} with arguments x, y, etc. are called as follows:
+
+\begin{center}
+	f[x,y,\ldots]
+\end{center}
+%\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+%	f[x,y,\ldots]			&	 \\
+%	\multicolumn{2}{l}{} 
+%\end{tabular}
+
+and entered:
+
+\begin{center}
+	f[x\_,y\_,\ldots] := \textit{expr},
+\end{center}
+
+%\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+%	f[x\_,y\_,\ldots] := \textit{expr}\,,		&\,	\\
+%	\multicolumn{2}{l}{} 
+%\end{tabular}
+
+where, \textit{expr} is an expression with the variables x, y \ldots .
+
+\textbf{Implicit functions} can also be defined, but this requires specifying the dependent variables in \textit{expr} (see example).
+
+\textbf{Piecewise functions} are implemented as follows:
+
+\begin{center}
+	f [\textit{x}\textunderscore ,\textit{ y}\textunderscore, ...] :=  Piecewise[{{\textit{expr1}, \textit{cond1}}, {\textit{expr2}, \textit{cond2}}, ...}, Indeterminate]
+\end{center}
+
+%\begin{tabular}{>{\hfill}p{12cm}p{5cm}}
+%	f [\textit{x}\textunderscore ,\textit{ y}\textunderscore, ...] :=  Piecewise[{{\textit{expr1}, \textit{cond1}}, {\textit{expr2}, \textit{cond2}}, ...}, Indeterminate]\,,		&\,	\\
+%	\multicolumn{2}{l}{} 
+%\end{tabular}
+
+
+where \textit{expr1, expr2,}\ldots  are expressions with variables \textit{x, y,}\ldots and \textit{cond1, cond2,}\ldots the conditions they must satisfy. Indeterminate indicates that in the regions where the variables do not satisfy any of the conditions, f is undefined.
+   
+In addition to self-defined functions, Mathematica has numerous built-in functions:
+
+\begin{tabular}{>{\hfill}m{9cm}p{8cm}}
+	Log[x]			&	$\ln(x)$\\
+	Log[x,b]		&	$\log_b(x)$\\
+	Exp[x]			&	$e^x$\\
+	Sin[x],  Cos[x], Sec[x],  Csc[x],Tan[x], Cot[x]							&	trigonometric functions\\
+	%ArcSin[x],  ArcCos[x], ArcSec[x],  ArcCsc[x], ArcTan[x], ArcCot[x]			&	inverse trigonometric functions \\
+	ArcSin[x],  ArcCos[x], ArcSec[x],  ArcCsc[x]		&	inverse trigonometric functions \\
+	ArcTan[x], ArcCot[x]			&	\\
+	\ifanalysis
+	Sinh[x],  Cosh[x], Sech[x],  Csch[x], Tanh[x], Coth[x]						&	hyperbolic functions \\
+	ArcSinh[x],  ArcCosh[x], ArcSech[x],  ArcCsch[x]	&	inverse hyperbolic functions\\
+	ArcTanh[x], ArcCoth[x]	&	\\\fi
+	\multicolumn{2}{l}{}
+\end{tabular}
+
+Note that Mathematica can work both symbolically and numerically. It always works with exact values, unless it is explicitly stated that it should work numerically. The latter can be done with \lstinline{//N} or \lstinline{N[expr]},  or by using a decimal.
+
+Finally, we note that there are numerous other functions available in Mathematica, such as the previously cited \lstinline|Piecewise| or the function \lstinline|Manipulate|, with which we can generate interactive ouput.\\
+
+\begin{tabular}{>{\hfill}p{6cm}p{11cm}}
+	Manipulate[\textit{expr}, \{$k$, $k_0$, $k_1$\}]	& 	gives an interactive result of expr in which we can adjust the value of k through a controller.\\ 
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+The values we can get $k$ to assume lie between $k_0$ and $k_1$. 
+
+
+\begin{example}
+Calculate $e^{\ln(x)}=x$:
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[]{Input}
+		Exp[Log[x]]
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		x
+	\end{mmaCell}
+\end{mdframed}
+
+Exact and numerical evaluation of $f(x) = \sin(x)^2/5$ for $x = 5$:
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		f[x_] := 2/10*Sin[x]^2
+		f[5]
+		f[5] // N
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		\mmaFrac{\mmaSup{Sin[5]}{2}}{5}
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		0.183907
+	\end{mmaCell}
+\end{mdframed}
+Once more the function: $f(x) = \sin(x)^2/5$, but numerically defined:
+
+	\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]	
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		f[x_] := 0.2*Sin[x]^2
+		f[5]
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		0.183907
+	\end{mmaCell}
+\end{mdframed}
+
+	Implicitly defined function $\sin(y) + y^3 = 6-x^3:$
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		fImpl[x_] := Sin[y[x]] + y[x]^3 == 6 -x^3
+	\end{mmaCell}
+	Remark that $x$ is the only independent variable.
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		fImpl[x] 
+		fImpl[2]
+	\end{mmaCell}
+	\begin{mmaCell}[]{Output}
+		Sin[y[2]] + \mmaSup{y[x]}{3} == 6-\mmaSup{x}{3}
+		
+		Sin[y[2]] + \mmaSup{y[2]}{3} == 6-\mmaSup{2}{3}
+	\end{mmaCell}
+\end{mdframed}	
+	A piecewise defined function:
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+\begin{mmaCell}[functionlocal={x_,x}]{Input} 
+	 fpw[x_] := Piecewise[\{\{x+1, x<0\},\{-x^2+1, x>0\}\},Indeterminate]
+	 fpw[-.5]
+	 fpw[0]
+	 fpw[.5]
+\end{mmaCell}
+\begin{mmaCell}[]{Output}
+	 0.5
+	 Indeterminate
+	 0.75
+\end{mmaCell}
+\end{mdframed}
+Interactive solution of Sin[x] for $x\in[0,2\pi]$:
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+\begin{mmaCell}[functionlocal={x_,x}]{Input} 
+	 Manipulate[Sin[x], \{x, 0, 2*Pi\}]
+\end{mmaCell}
+
+\begin{mmaCell}[moregraphics={moreig={scale=.6}}]{Output}
+	 \mmaGraphics{fig_Mathematica_1.PNG}
+\end{mmaCell}
+
+\end{mdframed}
+
+\end{example}
+
+\subsection{Solving (un)equality's}
+\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+	Solve[\textit{expr}, \textit{vars}]		&	tries to find solutions of the equation, inequality, or system of equations/inequalities in \textit{expr} as a function of the variable \textit{vars}\\
+	NSolve[\textit{expr}, \textit{vars}]		&	tries to find a numerical approximation of the solutions of the equation, inequality, or system of equations/inequalities in \textit{expr} to the variables in \textit{vars}\\
+	Simplify[expr]			&	ries to find a simplified form of the expression in expr\\
+	Apart[expr]			&	splits the expression in expr into partial fractions\\
+\end{tabular}
+
+The results of \lstinline|Solve| and \lstinline|NSolve| are given as lists of replacement rules.
+
+\begin{example}
+Find the exact and approximate values of the zero points of $x^2-2$:
+\begin{mdframed}[default, backgroundcolor=gray!40,roundcorner=8pt]
+
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		ZerosExact = Solve[x^2 - 2 == 0, x]
+		ZerosNumeriek = NSolve[x^2 - 2 == 0, x]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		\{\{x\(\to\)-\mmaSqrt{2}\},\{x\(\to\)\mmaSqrt{2}\}\}
+		
+		\{\{x\(\to\)-1.41421,\{x\(\to\)1.41421\}\}
+	\end{mmaCell}
+\end{mdframed}
+	Retrieve the replacement rule of the first zero point from the list of solutions :
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		nulpuntenExact[[1, 1]]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		x\(\to\)-\mmaSqrt{2}
+	\end{mmaCell}
+\end{mdframed}
+	The output of an unsolvable equation or system is an empty list.
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		Solve[\{x^2-2 == 0, 2x-5 == 0\}, x]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		\{\}
+	\end{mmaCell}
+\end{mdframed}
+Split the fraction $\frac{x^2-2}{x+4}$ in partial fractions:
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		Apart[(x^2 - 2)/(x + 4)]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		-4 + x + \mmaFrac{14}{4 + x}
+	\end{mmaCell}
+\end{mdframed}
+\end{example}
+
+%\subsubsection{Wiskundige Getallen}
+%Ten slotte overlopen we nog kort een aantal speciale wiskundige getallen:
+%Pi				:	\[Pi]
+%Infinity			:	\[Infinity]
+%Indeterminate		:	getal/functie is onbepaald
+%Exp[1]			:	E
+%I				: 	I (complex getal)
+
+
+\subsection{Visualisatie}
+Finally, we go over some of the functions that serve to create plots.
+
+\begin{tabular}{>{\hfill}p{8cm}p{9cm}}
+	Plot[ \textit{f}[\textit{x}],\{$x,a,b$\}] 					&	Create a plot of the function \textit{f} over the interval $[a,b]$\\
+	
+	Plot[ \{$f_1$[\textit{x}],$f_2$[\textit{x}],\ldots\},\{$x,a,b$\}] 	&	Creat a plot of the functions $f_1$ , $f_2$, \ldots over the interval $[a,b]$.\\
+	
+	Plot3D[ $g[x, y],\{x,a,b\},\{y,c,d\}$]		&	Create a 3D plot of $g$ over the range \\&
+	$[a,b]\times[c,d]$.\\
+	ListPlot[ \{\{$x_1,y_1$\},\{$x_2,y_2$\},\ldots\} ] 		&	Create a plot for the points $(x_i, y_i)$.\\
+	
+	ContourPlot[ $g[x, y],\{x,a,b\},\{y,c,d\}$]	&	plot the contour(s) of $g$ over the range\\
+	& $[a,b]\times[c,d]$ ($g$ can also be implicitly defined)\\
+	RegionPlot[ $cond,\{x,a,b\},\{y,c,d\}$]	&	plot the subarea of $[a,b]\times[c,d]$ where the conditions in \textit{cond} are met\\
+	
+	ParametricPlot[ $\{k[u],l[u]\},\{u,u_{min},u_{max}\}$]	&	plot the parametric equations  $x = k(u)$ and $y =l(u)$ for $u\in[u_{min},u_{max}]$\\
+	
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+There are numerous options for customizing plot formatting.  Below we give an overview of the most important ones:
+
+\begin{tabular}{>{\hfill}p{6.5cm}p{11cm}}
+	PlotLabel  -> "title" 					&	gives a title to the plot\\
+	AxesStyle -> Arrowheads[\textit{s}]			&	places arrows on the axes of the plot (pointing in an increasing sense). \textit{s} is a number that determines the size of the arrows.\\ 
+	AxesLabel -> \{"x","y"\}				&	labels the axes\\
+	PlotRange -> \{\textit{ymin, ymax}\}			&	specifies the y-range of the plot\\
+	ImageSize -> grootte				&	specifies the size of the plot\\
+	PlotStyles -> \{\textit{stijl1}, \textit{stijl2}, \ldots\}			&	plots the first function in \textit{stijl1}, the second in \textit{stijl2} \ldots\\
+	PlotLegend -> \{\textit{name1},  \textit{name2}, \ldots\}	&	creates a legend with the names of the plotted function\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+
+\begin{example}
+	Plot $\sin(x)$ the default layout: 
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+
+	\begin{mmaCell}[functionlocal = {x}]{Input}
+		Plot[Sin[x],\{x,0,2*Pi\}]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_2.pdf}
+	\end{mmaCell}
+\end{mdframed}
+	Plot $\sin(x)$ with custom layout:
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal = {x},moredefined = {PlotLegends,Arrowheads,Large,Dashed}]{Input}
+		Plot[Sin[x],\{x,0,2*Pi\},
+		PlotRange -> \{-1.5, 1.5\},
+		PlotLabel -> "Grafiek van sin(x)",
+		AxesStyle -> Arrowheads[0.02],
+		AxesLabel -> {"x", "y"},
+		ImageSize -> Large ]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_3.pdf}
+	\end{mmaCell}
+\end{mdframed}
+	Plot $\sin(x)$ en $cos(x)$ with custom layout, where $cos(x)$ is drawn as a dotted line:
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal = {x},moredefined = {PlotLegends,Arrowheads,Large,Dashed}]{Input}
+		Plot[\{Sin[x], Cos[x]\}, \{x, 0, 2*Pi\},
+		PlotRange -> \{-1.5, 1.5\},
+		PlotLabel -> "Graph of sin(x) and cos(x)",
+		AxesStyle -> Arrowheads[0.02],
+		AxesLabel -> \{"x", "y"\},
+		ImageSize -> Large,
+		PlotStyle -> \{Line, Dashed\},
+		PlotLegends -> \{"sin(x)", "cos(x)"\}]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_4.pdf}
+	\end{mmaCell}
+\end{mdframed}
+
+	Consider the function $g(x,y) = x^2+y^2$ over $[-5,5]\times[-5,5]$. Create a 3D and contour plot:
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal = {x,y}]{Input}
+		Plot3D[x^2 + y^2, \{x, -5, 5\}, \{y, -5, 5\}]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_5.pdf}
+	\end{mmaCell}
+	\begin{mmaCell}[functionlocal = {x,y}]{Input}
+		ContourPlot[x^2 + y^2, \{x, -5, 5\}, \{y, -5, 5\}]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_6.pdf}
+	\end{mmaCell}
+\end{mdframed}
+	Plot the circle of radius 2, using the implicit equation and the parametric equation:
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal = {x,y}]{Input}
+		ContourPlot[x^2 + y^2 == 4, \{x, -5, 5\}, \{y, -5, 5\}]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_7.pdf}
+	\end{mmaCell}
+
+	\begin{mmaCell}[functionlocal = {u}]{Input}
+		ParametricPlot[\{2*Cos[u],2*Sin[u]\}, \{u, 0, 2*Pi\}]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_8.pdf}
+	\end{mmaCell}
+\end{mdframed}
+
+	Plot the subarea of  $[-5,5]\times[-5,5]$, delimited by the circle of radius 2:
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal = {x,y},moredefined = {RegionPlot}]{Input}
+		RegionPlot[x^2 + y^2 <= 4, \{x, -5, 5\}, \{y, -5, 5\}]
+	\end{mmaCell}
+	\begin{mmaCell}[moregraphics={moreig={scale=.4}}]{Output}
+		\mmaGraphics{fig_Mathematica_9.pdf}
+	\end{mmaCell}
+\end{mdframed}
+\end{example}
+
+
+\section{Calculus specific intstructions}\label{sec:MathematicaAnalyse}
+% In wat volgt worden de verschillende aspecten van het functie-onderzoek in Mathematica doorlopen. Dit doen we aan de hand van onderstaande functies.
+%\begin{eqnarray}
+%f_1(x) &=& \dfrac{2 x^5-10 x^4+5 x^3+5 x^2-\dfrac{5 x}{2}+\frac{1}{2}}{-x^5+13 x^4-10 x^3-\dfrac{5 x^2}{2}+\dfrac{13 x}{2}-6},\\[5pt]
+%f_2(x) &=& -2 x y+\sin(x)+y^2.
+%\end{eqnarray}
+%
+%\paragraph{Vraag 1:} Definieer $f_1(x)$ en $f_2(x)$ als Mathematica functies.
+%
+%\subsection{Plots}
+%Bij een functie-onderzoek is het interessant om de functie visueel voor te kunnen stellen. Op papier zou dit de laatste stap zijn, aangezien we eerst alle eigenschappen van de functie  moeten nagaan, maar met Mathematica kunnen we onmiddellijk doen en de bekomen plot gebruiken om onze papieren bevindingen te bevestigen.
+%
+%
+%
+%\paragraph{Vraag 2.a}
+%Plot functie $f_1(x)$ voor x-waarden in het interval $[5,15]$. 
+%Wat zie je ? Hoe denk je dat de functie zich buiten het bereik van de plot zal gedragen?\\
+%
+%\paragraph{Vraag 2.b}
+%Verander het  bereik van de plot in de x- en y-richting, eventueel door gebruik te maken van \lstinline|Manipulate|. Welk gedrag herken je in het functieverloop?\\
+%
+%
+%\paragraph{Vraag 2.c}
+%Bereken nu de (numerieke) waarden van de nulpunten van de teller en noemer van $f_1$. Zijn al deze punten te zien op de plot? Waarom (niet)?\\
+
+
+\subsection{Limits}
+In Mathematica we can calculate limits with the function \lstinline|Limit|.
+
+\begin{tabular}{>{\hfill}p{8cm}p{9cm}}
+	Limit[ $f [x]$, $x$ -> $c$]								&	determine the limit of $f$  in $c$\\
+	Limit[ $f [x]$, $x$ -> $c$, Direction -> "FromAbove"]		&	determine the right limit of $f$  in $c$ \\
+	Limit[ $f [x]$, $x$ -> $c$, Direction -> "FromBelow"]		&	determine the right limit of $f$  in $c$ \\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+
+\begin{example}
+Determine the total, right and left limit of $1/x$ in $0$:
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		Limit[ 1/x, x -> 0]	
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		Indeterminate
+	\end{mmaCell}
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		Limit[ 1/x, x -> 0, Direction -> "FromAbove"]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		\(\infty\)
+	\end{mmaCell}
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		Limit[ 1/x, x -> 0, Direction -> "FromBelow"]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		-\(\infty\)
+	\end{mmaCell}
+\end{mdframed}
+
+	Determine the limit of $1/x$ for $x \rightarrow +\infty$:
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		Limit[ 1/x, x -> Infinity]	
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		0
+	\end{mmaCell}
+\end{mdframed}
+\end{example}
+
+%\paragraph{Vraag 3} Bereken de (linker- en rechter-) limieten van $f_1$ in de re{\" e}elwaardige nulpunten van de noemer en de limieten voor x gaande naar $+\infty $ en $-\infty $ . Vergelijk de uitkomsten met de plot uit vraag 2.
+
+\subsection{Derivatives}
+
+
+Derivatives of functions with one variable can be calculated using \textbf{\lstinline|Derivative|}:\\
+
+\begin{tabular}{>{\hfill}p{8cm}p{9cm}}
+	Derivative$[n][f][x]$			&			$n$-th order derivative of the function $f(x)$ towards $x$\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+Usually we will be using the short notation of \lstinline|Derivative|:\\
+
+\begin{tabular}{>{\hfill}p{8cm}p{9cm}}
+	$f'[x]$							&			first order derivative of $f(x)$\\
+	$f''[x]$						&			second order derivative of $f(x)$\\
+	D$[expr, x]$					&			first order partial derivative of \textit{expr} to x\\
+	D$[expr,\{x,n\}]$				&			$n$-th order partial derivative of \textit{expr} to x\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+The difference between these notations is subtle and often they can be used interchangeably. However, we recommend to use $f'[x]$ when possible.
+Remark that $f(x)$ can be implicitly defined as well. 
+
+\begin{example}
+Determine the first and second derivatives of $x^2+x$ :
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		f[x_] := x^2 + x;
+		f'[x]
+		f''[x]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		1 + 2x
+		2
+	\end{mmaCell}
+\end{mdframed}
+
+	We can keep the derivative as a function:
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		df[x_] := f'[x]
+		df[x]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		1 + 2 x
+	\end{mmaCell}
+\end{mdframed}
+
+	Determine the derivative of the implicit function $y^3+y \sin =6-x^3$: 
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		fImpl[x_] := Sin[y[x]] + y[x]^3 == 6 - x^3
+		fImpl'[x]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		Cos[y[x]] y'[x] + 3 \mmaSup{y[x]}{2} y'[x] == -3 \mmaSup{x}{2}
+	\end{mmaCell}
+\end{mdframed}
+
+	Try to rewrite the outcome in explicit form: 
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[]{Input}
+		Solve[fImpl'[x], y'[x]]	
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		\{\{\mmaSup{y}{\(\prime\)}[x]\(\to\)-\mmaFrac{3\mmaSup{x}{2}}{Cos[y[x]]+3\mmaSup{y[x]}{2}}\}\}
+	\end{mmaCell}
+\end{mdframed}
+\end{example}
+
+%\paragraph{Vraag 4.a}
+%Bepaal de eerste en tweede afgeleide van  $f_1(x)$ en plot deze samen met $f_1(x)$  voor $x \in [ -5 , 15 ]$ .
+
+%\paragraph{Vraag 4.b}
+%Bepaal de (lokale) extrema en buigpunten van $f_1(x)$ en controleer dit op de plot uit Vraag 4.a.
+
+
+With \lstinline{Derivative} we can also determine derivatives of functions of multiple variables:
+
+\begin{tabular}{>{\hfill}p{8cm}p{9cm}}
+	Derivative$[n_1,n_2,\ldots ][f][x_1,x_2,\ldots]$			&			derivative of the function $f(x_1,x_2,\ldots)$ that is derived $n_i$ times with respect to the variable $x_i$.\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+The short notation  $f'[x_1,x_2,\ldots]$ can no longer be used for functions of multiple variables since it does not indicate to which variable(s) it should be derived. \lstinline{D} can be used:
+
+\begin{tabular}{>{\hfill}p{8cm}p{9cm}}
+	D$[expr,\{x_1,n_1\},\{x_2,n_2\},\ldots]$				&			derivative of \textit{expr}, that is $n_i$ derived with respect to the variable $x_i$,\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+where \textit{expr} may again be explicitly or implicitly defined.
+For functions with multiple variables, we can also compute the gradient:
+
+\begin{tabular}{>{\hfill}p{8cm}p{9cm}}
+	Grad$[f,\{x_1,x_2,\ldots\}]$				&			gradient of $f$\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+
+\begin{example}
+Determine $f_x(x,y)$ and $f_{xy}(x,y)$ if $f(x,y) = x^2+xy+y^2$.
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	
+
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		D[x^2 + x y + y^2, \{x, 1\}]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		2x + y
+	\end{mmaCell}
+	\begin{mmaCell}[functionlocal={y,x}]{Input}
+		D[x^2 + x y + y^2, \{x, 1\},\{y, 1\}]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		1
+	\end{mmaCell}
+\end{mdframed}
+
+Determine the gradient of $f(x,y) = x^2+xy+y^2$ in the point $(1,2)$.
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={y,x}]{Input}
+		gGrad = Grad[x^2 + x y + y^2, \{x, y\}]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		\{2x+y, x+2y\}
+	\end{mmaCell}
+
+	\begin{mmaCell}[functionlocal={y,x}]{Input}
+		gGrad /. \{x->1, y->2\}
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		\{4, 5\}
+	\end{mmaCell}
+\end{mdframed}
+\end{example}
+
+
+%\paragraph{Vraag 5.a}
+%Bepaal de gradi\"ent van $f_2(x,y)$ in de punten $(0,0), (2,1)$ en $(-1,2)$. Interpreteer de uitkomsten aan de hand van een informatieve plot.
+%
+%\paragraph{Vraag 5.b}
+%Bepaal de vergelijkingen van de normaal en het raakvlak in het punt $(2,1,f_2(2,1))$.
+
+\subsection{Integrals}
+Mathematica has two functions for integrating functions, being \lstinline{Integrate} and \lstinline{NIntegrate}. The former calculates an integral analytically, while the latter provides a numerical approximation.
+
+\renewcommand{\arraystretch}{2.5}
+\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+	Integrate$[f,x]$				&			determines the indefinite integral $\int f(x) dx$,\\
+	Integrate$[f,\{x,x_{min},x_{max}\}]$				&			determines the definite integral $ s\int^{x_{max}}_{x_{min}} f(x) dx$,\\
+	NIntegrate$[f,\{x,x_{min},x_{max}\}]$				&			determines the numerical approximation of $\int^{x_{max}}_{x_{min}} f(x) dx$,\\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+
+\begin{example}
+	Determine the following integral
+	  $$ \ds\int\left(4x - x^2\right) dx.$$
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		Integrate[4x-x^2,x]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		2\mmaSup{x}{2} - \mmaFrac{\mmaSup{x}{3}}{3}
+	\end{mmaCell}
+\end{mdframed}
+	Determine 
+	 $$\ds\int\limits^{-\infty}_0 e^x dx.$$
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={x_,x}]{Input}
+		Integrate[Exp[x],\{x,0,-Infinity\}]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		-1
+	\end{mmaCell}
+\end{mdframed}
+
+	Determine the numerical value of the definite integral  $$\ds\int\limits^{1}_0 \frac{\sin(x)}{x} dx.$$
+	
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+	\begin{mmaCell}[functionlocal={y,x}]{Input}
+		NIntegrate[Sin[x]/x,\{x,0,1\}]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		0.946083
+	\end{mmaCell}
+	
+\end{mdframed}
+\end{example}
+
+
+%\paragraph{Vraag 6.a}
+%Bereken de bepaalde integralen $\int^{10}_{0} f_1(x) dx$ en $ \int^{15}_{0} f_1(x) dx$. Verklaar je uitkomst aan de hand van eerder bekomen resultaten.
+%
+%\paragraph{Vraag 6.b}
+%Bereken de kringintegraal $\int^{}_{C} f_2(s) ds$, waarbij $C$ een cirkel rond de oorsprong is, met straal~1.
+
+
+\subsection{Series}
+We use following Mathematica functions to determine the Taylor series expansion of a function:	
+
+\begin{tabular}{>{\hfill}p{5cm}p{12cm}}
+	Series[$f,\{x,x_0,n\}$	]						&			gives the taylor series expansion of $f(x)$ around $x_0$ with terms up to and including the $n$-the order (+ the error term of the $n+1$th order)\\
+	Normal[$s$]						&			Returns round the Taylor development $s$ to the $n$th order \\
+	\multicolumn{2}{l}{} 
+\end{tabular}
+
+\begin{example}
+	Determine the Taylor series expansion of $\ln(x)$ in the area of  $x=1$ up to the $2-$the order term. 
+
+\begin{mdframed}[default,backgroundcolor=gray!40,roundcorner=8pt]
+
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		s = Series[Log[x], \{x, 1, 2\}]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		(x-1) -\mmaFrac{1}{2} \mmaSup{(x-1)}{2} +\mmaSup{O[x-1]}{3}
+	\end{mmaCell}
+
+	\begin{mmaCell}[functionlocal={x}]{Input}
+		Normal[s]
+	\end{mmaCell}
+	\begin{mmaCell}{Output}
+		-1 -\mmaFrac{1}{2}\mmaSup{(-1+x)}{2} +x
+	\end{mmaCell}
+	
+\end{mdframed}
+\end{example}
+
+%\paragraph{Vraag 7.a}
+%Plot $f_1(x)$ samen met zijn Taylor-ontwikkeling in de omgeving van  $x = 0$ tot en met de $k$-de orde termen, voor  $k = 1, 5, 10$ over het interval $[-1,1]$.
+%
+%\paragraph{Vraag 7.b}
+%Bepaal voor elk van de Taylor-ontwikkelingen uit vraag 7a de totale fout over het interval $[-0.5,1]$. Hoe verklaar je dit resultaat?

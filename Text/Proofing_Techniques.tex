@@ -1,0 +1,246 @@
+\chapter{Proofing Techniques}
+In this appendix we gather information to help you read, understand and construct definitions, theorems and proofs.
+
+\section{Definitions}
+A definition is a term conceived by humans and used as a shortcut for a complicated idea. For example, we say that an integer is even as a shortcut to say that if we divide this number by two, we get a remainder of zero. With a precise definition we can answer certain questions unambiguously. For example, have you ever wondered if zero was an even number? Now the answer should be clear as we have a precise definition of what we mean by the term even.
+
+A single term can have multiple definitions. For example, they could say that the integer $n$ is even if there is another integer $k$ such that $n=2k$. We call this an equivalent definition, because it categorizes even numbers in the same way as our first definition.
+%
+Definitions are like two-way streets --- we can use a definition to replace something rather complicated with its definition (if it fits) and we can replace a definition with its more complicated description. A definition is usually written as some form of implication, such as ``If something-nice-happens, then party.' However, this also means that ``If party, then something-nice-happens,'' even though this may not be formally stated. This is what we mean when we say a definition is a two-way street --- it's actually two implications going in opposite ``directions''.
+%
+Anyone (including you) can come up with a definition, as long as it's unambiguous, but the real test of a definition's usefulness is whether or not it's useful for describing interesting or common situations.
+
+\section{Theorems}
+Advanced mathematics is about understanding theorems. Reading them, understanding them, applying them, proving them. Each theorem is a shortcut --- we prove something in general and then when we encounter a specific case that falls under the theorem, we can immediately say that we know something else about the situation by applying the theorem. In many cases, this new information can be obtained with much less effort than when we would not have the theorem at our disposal.
+%
+The first step to arrive at an understanding of a theorem is realising that the statement of any theorem can be rewritten with statements of the form ``If something-happens, then something-else-happens.'' The ``something-happens'' part is the \textbf{hypothesis} \index{hypothesis}\index[aut]{hypothese} or \textbf{assumption} \index{assumption}\index[aut]{assumptie} (\textit{hypothese}) and the ``something-else-happening'' is the \textbf{conclusion} \index{conclusion}\index[aut]{conclusie} or \textbf{decision} \index{decision}\index[aut]{besluit} (\textit{conclusie}). To understand a theorem, it helps to rewrite its statements using this construction. To apply a theorem, we verify that in a certain case ``something-happens'' and immediately conclude that ``something-else-happens''. To prove a theorem, we must argue based on the assumption that the hypothesis is true and via the process of logic obtain that the conclusion must then be true as well.
+
+
+
+\ifanalysis
+
+\section{Logic}
+In proofs and theorems we often use statements that are either true (T) or false (F). For example, `2 is an odd number' is a false statement, while `2 is an even number' is a true statement. With such simple statements we can form combined statements that are true or false according to the simple statements of which they are composed and in which way (and versus or).
+
+Let $p$ and $q$ be two statements, then the negation of the statement $p$ ($\neg\,p$) is true if $p$ is false and vice versa. We can represent this schematically in the following truth table:
+
+\begin{center}
+\begin{tabular}{c|c}
+     $p$& $\neg\, p$  \\\hline
+     T&F\\
+     F&T
+\end{tabular}
+\end{center}
+
+In an analogous way, we can construct truth tables for the statement `$p$ and $q$', i.e.
+\begin{center}
+\begin{tabular}{cc|c}
+     $p$&$q$& $p\wedge q$  \\\hline
+     T&T&T\\
+     T&F&T\\
+     F&T&F\\
+     F&F&F
+\end{tabular}
+\end{center}
+and for the statement `$p\vee q$':
+\begin{center}
+\begin{tabular}{cc|c}
+     $p$&$q$& $p\vee q$  \\\hline
+     T&T&T\\
+     T&F&T\\
+     F&T&T\\
+     F&F&F
+\end{tabular}
+\end{center}
+From these truth tables it immediately follows that $p\wedge\,q\Longleftrightarrow (\neg\,p\vee\neg\,q)$ and that $p\vee\,q\Longleftrightarrow (\neg\,p\wedge\neg\,q)$. 
+
+The statements $p$ and $q$ also allow us to write down implications and equivalences. For example, the implication `if $p$, then $q$', `$p$ implies $q$' or `$p$ is sufficient for $q$', symbolically represented by $p\Rightarrow q$, is true if $ p$ and $q$ are true. In the implication $p\Rightarrow q$ we call $p$ the assumption or hypothesis and $q$ the conclusion. The corresponding truth table is given by
+\begin{center}
+\begin{tabular}{cc|c}
+     $p$&$q$& $p\Rightarrow q$  \\\hline
+     T&T&T\\
+     T&F&F\\
+     F&T&T\\
+     F&F&T
+\end{tabular}
+\end{center}
+Based on these truth tables, we can verify that the statement $p\Rightarrow q$ is logically equivalent to `not $p$ or $q$'. The inverse of this implication is $q\Rightarrow p$, but this is not logically equivalent to $p\Rightarrow q$. Thus, we cannot prove the latter implication by proving the inverse implication, nor can we say that $q\Rightarrow p$ is true after we have proven that $p\Rightarrow q$ is true. On the other hand, the contraposition of the implication $p\Rightarrow q$, i.e.\ the implication $\neg q\Rightarrow\neg p$, is logically equivalent to the given implication. Proving an implication $p\Rightarrow q$ can therefore be done by proving its contraposition. 
+
+The truth table for the equivalence `$p$ if and only if $q$', `$p$ equivalent to $q$' or '$p$ is needed and sufficient for $q$' is given by
+\begin{center}
+\begin{tabular}{cc|c}
+     $p$&$q$& $p\Leftrightarrow q$  \\\hline
+     T&T&T\\
+     T&F&F\\
+     F&T&F\\
+     F&F&T
+\end{tabular}
+\end{center}
+
+Since the contraposition of $q \Rightarrow p$, being $\neg p\Rightarrow\neg q$, is equivalent to $q\Rightarrow p$, we can prove the equivalence $p\Leftrightarrow q$ by proving that $p\Rightarrow q$ and $\neg p\Rightarrow\neg q$ hold. 
+
+
+\section{Methods of proof}
+``I don't know how to start!'' is often the lament of the novice proof builder. Here are a few pieces of advice.
+%
+\begin{enumerate}
+%
+\item  As mentioned above, you rewrite the statement of the theorem in an ``if-then'' form. This simplifies identifying the hypothesis and conclusion, referred to in the following paragraphs.
+%
+\item Ask yourself what kind of statement you are trying to prove. This is always a part of your conclusion. Are you being asked to conclude that two numbers are equal, that a function is differentiable, or that a set is a subset of another? You cannot apply other techniques if you do not know what type of conclusion you have.
+%
+\item  Write down reformulations of your hypotheses. Interpret and translate each definition correctly.
+%
+\item Write down your hypothesis at the top of a piece of paper and your conclusion at the bottom. See if you can formulate a statement that precedes and implies the conclusion. Work downwards from your hypothesis and upwards from your conclusion, and see if you can equate them in the middle. When you're done, neatly rewrite the proof, from hypothesis to conclusion, with verifiable implications with each subsequent statement.
+%
+\item As you work through your proof, think about the types of objects your symbols represent. For example, suppose $A$ is a set and $f(x)$ is a real-valued function. Then the expression $A+f$ might not make sense if we have not defined what it means to 'add a set' to a function, so that we can stop at that point and adjust it accordingly. On the other hand, we can understand $2f$ as the function whose rule is described by $(2f)(x)=2f(x )$.``Think about your objects'' means always checking that your objects and operations are compatible.
+%
+\end{enumerate}
+
+\subsection{Proof by construction}
+Conclusions of proofs come in different types. Often a theorem will simply claim that something exists. The best, but not the only way to show that something exists is to actually construct it. Such a proof is called \textbf{constructive} \index{constructive}\index[aut]{opbouwend} (\textit{opbouwend}). What you need to realize about constructive proofs is that the proof itself will contain a procedure that can be used computationally to construct the desired object. If the procedure is not too cumbersome, the proof itself is just as useful as the statement of the theorem.
+
+\subsection{Equivalences}
+When a statement uses the expression ``if and only if'' (or the abbreviation ``iff''), it is a shorter way of saying that two if-then statements are true. So if a theorem says ``P if and only if Q,'' then it is true that ``if P, then Q'' and it is also true that ``if Q, then P''. Statements such as ``I wear bright yellow knee-high rubber boots if and only if it rains.'' This means that I never forget to wear my yellow boots when it rains and I am never seen in such crazy boots unless it rains. You never have one without the other. I have my boots on and it is raining or I am not wearing my boots and it is dry.
+%
+The result of proving such statements is like a 2-for-1 sale, we get to do two proofs. Suppose $P$ and conclude $Q$, then start again and assume $Q$ and conclude $P$. For this reason, ``if and only if'' is sometimes abbreviated with $\iff$. Proofs indicate which implication is proved by prefixing each with $\Rightarrow$ (sufficient condition) or $\Leftarrow$ (necessary condition). A carefully written proof will remind the reader which statement is being used as the hypothesis, a faster version will let the reader infer it from the direction of the arrow. Tradition dictates that we do the ``easy'' half first, but that's difficult for a student to know until you're done with both halves! If you rewrite your proofs (a good habit), you can choose to put the easy half first.
+%
+These types of theorems are called \textbf{equivalences} or \textbf{characterizations} (\textit{equivalenties} of \textit{gelijkwaardigheden}) and are one of the most pleasing results in mathematics. They say that two objects, or two situations, really are the same. You do not have one without the other. The more different $P$ and $Q$ seem to be, the more pleasant it is to discover that they are really equivalent. And if $P$ describes a very mysterious solution or involves a difficult calculation, while $Q$ is transparent or involves simple calculations, then we have found a great shortcut for a better understanding or faster calculation. Remember that every statement is basically a shortcut in one form or another. You will also find that if proving $P\Rightarrow Q$ is very easy, then proving $Q\Rightarrow P$ is probably proportionally more difficult. Sometimes the two halves are about equally difficult. And on rare occasions, you can string together a whole host of other equivalencies to form the one you want and not even have to do two halves. In this case, one half's argument is just the other half's argument, but reversed.
+\index{equivalences}\index[aut]{equivalenties}\index{characterizations}\index[aut]{gelijkwaardigheden}
+%
+One last remark about equivalences. If you see a statement of a theorem that says that two things are ``equivalent'', you should first translate it into an ``if and only if'' statement.
+
+
+\subsection{Negation}
+When we construct the contrapositive of a theorem, we must negate the two statements in the implication. And if we construct a proof by \textbf{contradiction} (\textit{contradictie} of \textit{tegenstelling}) we have to negate the conclusion of the theorem. One way to proceed is to simultaneously negate the hypothesis and conclusion of an implication (but remember that this is not guaranteed to be a true statement). We thus often need to negate statements and in some situations this can be difficult.
+\index{contradiction}\index[aut]{contradictie}
+
+%
+If a statement says that a set is empty, then its negation is the statement that the set is not empty. That is obvious. Suppose a statement says ``something-happens'' for all $i$, or every $i$, or some random $i$. Then the negation is that ``something-doesn't-happening'' for at least one value of $i$. If a statement says that at least one ``thing'' exist, then the negation is the statement that there is no ``thing''. If a statement says that a ``thing'' is unique, then the negation is that there are zero or more than one of the ``thing.'
+%
+We will not cover all possibilities, but we would like to point out that logical quantifiers such as ``there exists'' or ``for every'' should be treated with caution when negating statements. Studying proofs that use contradiction is a good first step in understanding the range of possibilities.
+
+\subsection{Contrapositive}
+The \textbf{contrapositive} (\textit{contrapositief}) of an implication $P\Rightarrow Q$ is the implication ${\rm not}(Q)\Rightarrow{\rm not}(P)$, where ``not '' means the logical negation. An implication is true if and only if its contrapositive is true. In symbols, $(P\Rightarrow Q)\iff({\rm not}(Q)\Rightarrow{\rm not}(P))$ is a statement. Such statements about logic, which are always true, are called \textbf{tautologies} (\textit{tautologie\"en}).
+\index{contrapositive}\index[aut]{contrapositief}\index{tautology}\index[aut]{tautologie}
+
+For example, it's a statement like ``If a vehicle is a fire truck, it has big tires and a siren''. The contrapositive is ``if a vehicle doesn't have big tires or it doesn't have a siren, then it's not a fire truck''. Notice how the ``and'' became an ``or'' when we negated the conclusion of the original theorem.
+%
+It will often happen that it is easier to construct a proof of the contrapositive than of the original implication. If you have trouble formulating a proof of an implication, see if the contrapositive is easier to prove. The trick is to accurately construct the negation of complex statements.
+
+\subsection{Converse}
+The \textbf{converse} (\textit{omgekeerde}) of the implication $P\Rightarrow Q$ is the implication $Q\Rightarrow P$. There is no guarantee that the truth of these two statements is related. In particular, if an implication is proven to be a theorem, do not try to use its converse as if it were a theorem as well. Sometimes the converse is true (and we have an equivalence). But more likely the converse is false, especially if it was not included in the statement of the original theorem. \index{converse} \index[aut]{omgekeerde}
+%
+For example, we have the statement ``if a vehicle is a fire engine, it has big tires and a siren.'' The converse is false. The statement ``if a vehicle has big tires and a siren, it's a fire truck'' is false. A police vehicle for use on a public beach could also have large tires and a siren, but it is not equipped to fight fires.
+%
+
+\subsection{Contradiction}
+Another method of proof is known as \textbf{proof by contradiction} (\textit{bewijs d.m.v.\ contradictie}) and can be a powerful (and satisfying) method. Simply put, suppose you want to prove the implication ``if $A$, then $B$''. As usual, we assume $A$ to be true, but we also assume $B$ to be false. If our original implication is true, then these two assumptions should lead us to a logical contradiction. In practice, we assume that the negation of $B$ is true (see proof technique contrapositive). So we argue, based on the assumptions $A$ and $\text{not}(B)$, and we look for an incorrect conclusion such as $1=6$ or a set that is simultaneously empty and non-empty or a matrix that is both non-singular and singular.
+%
+You have to be careful with formulating proofs that look like proofs by contradiction, but in reality are not. This happens when you assume $A$ and $\text{not}(B)$ and go on to give a ``normal'' and direct proof that $B$ is true by only using the assumption that $A$ is true. Your last step then is to claim that $B$ is true and then call upon the assumption that $\text{not}(B)$ is true, obtaining the desired contradiction. Instead, you could have avoided the overhead of a proof by contradiction and worked with the direct proof.
+%
+Here is a simple example of a proof by contradiction. There are direct proofs that are just as easy, but this will prove the point.
+
+\noindent {\bf Statement}: If $a$ and $b$ are odd integers, then their product, $ab$, is odd.
+
+\noindent {\bf Proof}:  To begin a proof by contradiction, assume the hypothesis that $a$ and $b$ are odd. Assume also the negation of the conclusion, in this case being that $ab$ is even. Then there are integers $j$, $k$, $\ell$ such that $a=2j+1$, $b=2k+1$, $ab=2\ell$. Then
+%
+\begin{align*}
+0
+&=ab-ab\\
+&=(2j+1)(2k+1)-(2\ell)\\
+&=4jk+2j+2k-2\ell+1\\
+&=2\left(2jk+j+k-\ell\right)+1\,.
+\end{align*}
+%
+Note that we used both our hypothesis and the negation of the conclusion in the second line. Now divide the integer on each side of this set of equalities by 2. At the left hand side we will get a remainder of 0, while at the right hand side the remainder will be 1. Both remainders cannot be equal, so this is our desired contradiction. The conclusion (that $ab$ is odd) is thus true.
+%
+
+\subsection{Uniqueness}
+A theorem will sometimes claim that an object, with a certain desirable property, is unique. In other words, there is only one such object. To prove this, a standard technique is to assume that there are two such objects and then analyze the consequences. The end result can be a contradiction or the conclusion that the two supposedly different objects are really equal.
+\index{uniqueness}\index[aut]{uniciteit}
+
+\subsection{Proving identities}
+Many theorems have conclusions that say that two objects are equal. Perhaps one object is difficult to calculate or understand while the other is easy to calculate or understand. This would make an interesting theorem. Whether the result is interesting or not, we follow the same method to formulate a proof. Sometimes we have to use specialized notions of equality, but in other cases we can string together a list of equalities.
+%
+The wrong way to prove an identity is to start by writing it down and then search until it becomes an obvious identity. The first mistake you make is writing the statement you want to prove down as if you already believe it to be true. But more dangerous is the possibility that some of your operations are not reversible. Here's an example. Let's prove that $3=-3$.
+
+\begin{align*}
+3&=-3&&\text{(This is a bad start.)}\\
+3^2&=(-3)^2&&\text{(Square both sides.)}\\
+9&=9\\
+0&=0&&\text{(Subtract 9 from both sides.)}
+\end{align*}
+%
+So since $0=0$ is a true statement, it follows that $3=-3$ is a true statement? No. Of course we don't really expect a valid proof for $3=-3$, but this attempt should illustrate the dangers of this (incorrect) method.
+%
+What you have just seen are proofs of the following form. To prove that $A=D$ we write
+%
+\begin{align*}
+A
+&=B&&\text{(Theorem, Definition or Hypothesis that justifies $A=B$.)}\\
+&=C&&\text{(Theorem, Definition or Hypothesis that justifies $B=C$.)}\\
+&=D&&\text{(Theorem, Definition or Hypothesis that justifies $C=D$.)}
+\end{align*}
+%
+In your drafts, where you explore possible methods for proving a theorem, you can derive a variety of expressions by sometimes making connections with different bits and pieces, while sometimes leaving some parts out. Once you see a direct line, rewrite your proof and mimic this style carefully.
+
+\subsection{Induction}
+\textbf{Induction} or \textbf{mathematical induction} (\textit{wiskundige inductie}) is a method for proving statements that are indexed by integers. In other words, suppose you have a statement to prove that actually contains multiple statements, one for $n=1$, another for $n=2$, a third for $n=3$, etc. If there is enough similarity between the statements, you can use a script to prove them all at once. \index{induction}\index[aut]{inductie}
+%
+Consider for example the statement
+%
+
+{\bf Statement}  $1+2+3+\dots+n=\frac{n(n+1)}{2}$ for $n\geq 1$.
+
+
+This is an abbreviation for the statements $1=\frac{1(1+1)}{2}$, $1+2=\frac{2(2+1)}{2}$, $1+2+3= \frac{3(3+1)}{2}$, $1+2+3+4=\frac{4(4+1)}{2}$, and so on. You can do the calculations in each of these statements and check if all four are true. We may not be surprised that the fifth statement is also true (go ahead and check). However, do we think that the statement is also true for $n=872$? Or $n=1,234,529$?
+
+%
+To see that these questions are not so ridiculous, take a look at the following example. The statement ``$n^{2}-n+41$ is a prime number'' is true for integers $1\leq n\leq 40$ (verify a few). However, if we check $n=41$, we find $41^2-41+41=41^2$, which is not a prime number.
+%
+So how do we prove infinitely many statements at once? More formally, let's denote our statements as $P(n)$. If we can then prove the following two claims
+%
+\begin{enumerate}
+\item $P(1)$ is true.
+\item If $P(k)$ is true, then $P(k+1)$ is true.
+\end{enumerate}
+%
+It then follows that $P(n)$ is true for all $n\geq 1$. To understand this, consider the process of climbing an infinitely long ladder with equally spaced steps. Faced with such a ladder, suppose I tell you that you are able to step on the first step, and if you are on a certain step then you are able to go to the next step. It follows that you can climb the ladder as far as you want. The first formal statement above is related to entering the first step and the second formal statement is related to the assumption that if you stand on one step, you can always reach the next step.
+%
+In practice, determining that $P(1)$ is true is called the ``base case'' and is simple in most cases. Establishing that $P(k)\Rightarrow P(k+1)$ is referred to as the ``induction step,'' or in this course (and elsewhere) we will generally refer to the assumption of $P(k)$ as the ``induction hypothesis''. This is perhaps the most mysterious part of a proof by induction, because it seems like you are assuming ($P(k)$), which you are trying to prove ($P(n)$). Sometimes it's even worse because, as you become more familiar with induction, we often do not bother using a different letter ($k$) for the index ($n$) in the induction step. Note that the second formal statement never says that $P(k)$ is true. It just says what logically could follow if $P(k)$ is true. We can make statements like ``If I lived on the moon, I could jump over a 12 meter high beam''. This may be a true statement, but it does not say we live on the moon, and we indeed may never live there.
+%
+Enough generalities. Let's work out an example and prove the above statement about sums of integers. Formally, our statement is 
+$P(n):\ 1+2+3+\dots+n=\frac{n(n+1)}{2}$.
+
+%
+{\bf Proof}:  Base case.  $P(1)$ is the statement $1=\frac{1(1+1)}{2}$, which simplifies to the true statement $1=1$.
+%
+
+\textbf{Induction step}: We assume that $P(k)$ is true and will try to prove $P(k+1)$. Given what we want to achieve, it is natural to start by examining the sum of the first $k+1$ integers.
+%
+\begin{align*}
+1+2+3+\dots+(k+1)
+%
+&=\left(1+2+3+\dots+k\right) + (k+1)\\
+%
+&=\frac{k(k+1)}{2} + (k+1)&&\text{(Induction hypothesis.)}\\
+%
+&=\frac{k^2+k}{2} + \frac{2k+2}{2}\\
+%
+&=\frac{k^2+3k+2}{2}\\
+%
+&=\frac{(k+1)(k+2)}{2}\\
+%
+&=\frac{(k+1)((k+1)+1)}{2}
+%
+\end{align*}
+%
+We then recognize the two ends of this chain of equalities as $P(k+1)$. So, by mathematical induction, the theorem is true for all $n$.
+
+%
+How do you recognize when to use induction? The first clue is a statement that consists of many statements, one for each integer. The second clue would be that you start a more standard proof and find yourself using a lot of words like ``and so on'' (as above) or a lot of dots to establish patterns that you believe will last forever. However, there are many minor cases where induction may be justified, but we make no effort to use this proof technique.
+
+%
+Induction is important enough and used often enough that it comes in different variations. The base case sometimes starts with $n=0$ or possibly with an integer greater than $1$. Some formulate the induction step as $P(k-1)\Rightarrow P(k)$. There is also a ``strong form'' of induction where we assume $P(1)$, $P(2)$, $P(3)$, \dots $P(k)$ all as hypotheses to prove the conclusion $P(k+1)$.
+\fi

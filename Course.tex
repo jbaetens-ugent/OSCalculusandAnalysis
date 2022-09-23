@@ -1,0 +1,768 @@
+\newif\ifvc
+\newif\ifcourse
+\newif\ifanalysis
+\newif\ifcalculus
+\newif\ifDE
+
+\newif\ifmathematica
+\newif\ifpython
+
+\mathematicatrue
+%\pythontrue
+
+\coursetrue
+%\DEtrue
+
+\analysistrue
+%\calculustrue % comment out to hide answers
+
+%\vctrue
+
+
+
+\documentclass[twoside,english]{book}
+% gensymb
+%amssymb
+\usepackage[dutch]{babel}
+\usepackage{epsfig}
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+\usepackage{listings,color,textcomp,marvosym,flafter,longtable,subfigure,rotating,lineno,epigraph,makeidx,dcolumn,lscape,setspace,hyphenat,threeparttable,bm,tabularx,eurosym,xpatch,keystroke}
+\usepackage[sumlimits]{amsmath}
+\usepackage{amsfonts}
+\usepackage{alphalph}
+
+
+\usepackage{mathtools,ulem,wrapfig,marginnote}
+\usepackage{commath,esvect}
+\usepackage[sc,osf]{mathpazo}
+\usepackage[toc,page]{appendix}
+\usepackage{phaistos}
+\usepackage[answerdelayed, lastexercise]{exercise}
+\usepackage{changepage}
+\usepackage{etoolbox}
+\usepackage{refcount}
+\usepackage[dutch]{babel}
+
+\usepackage{siunitx,framed,multicol
+}
+\usepackage{verbatim,tikz}
+\usepackage[amsmath,thmmarks,thref,hyperref]{ntheorem}
+%\usepackage{thmtools}
+\usetikzlibrary{shadows,shadings} % sidenote blocks
+\usetikzlibrary{shapes,decorations} % sidenote blocks
+\usepackage[framemethod=TikZ]{mdframed}
+%\usepackage{cite}
+%\usepackage{latexsym}
+\usepackage[prefix,norefpage,intoc]{nomencl}
+\usepackage{multirow}
+\usepackage[version=3]{mhchem}
+\usepackage{array,pstricks,listings,xhfill,index}
+\usepackage[vlined,ruled]{algorithm2e}
+\usepackage[verbose, centering,reversemp,paper=a4paper]{geometry}
+\usepackage[latin1]{inputenc} 
+\usepackage{fancyhdr,enumitem,fontawesome}
+\usepackage{hhline}     % generates nicer table lines (without missing pixels) + more flexible
+\usepackage[times]{quotchap} 
+\usepackage[font={small},labelfont={bf},center]{caption}
+% this package used to produce a different style of page numbering
+%\usepackage{chappg}  
+%\usepackage{times}  
+%\usepackage{charter} %utopia
+%\usepackage[math]{kurier}
+%\usepackage[T1]{fontenc}
+%\usepackage{bera}
+\usepackage{arev}
+\usepackage{url}
+\usepackage{warpcol,colortbl}
+%\usepackage{siunitx}
+\usepackage{wrapfig,floatrow}
+\usepackage{floatflt}
+\usepackage{graphicx}
+\usepackage{epstopdf,pdfpages}
+% this package is used for colored text
+\usepackage{xcolor}
+% this package is used for intelligent spaces
+\usepackage{xspace}
+%\input{macros.tex}
+\usepackage[calcwidth,newparttoc]{titlesec}
+% use the titletoc package to change the toc
+\usepackage[breaklinks=true,pdfpagemode=UseThumbs,pdfauthor={Jan Baetens}]{hyperref}
+\usepackage[acronym,nonumberlist]{glossaries}
+\usepackage{titletoc}
+% this package is the natural frontend for pgf (a package for creating graphics in an inline manner).
+%\usepackage[round]{natbib}
+\usepackage[thumblink=rule,linefill=dots,height=2.5cm,minheight={47pt},width=1cm,distance={1mm},topthumbmargin={auto},bottomthumbmargin={auto},final=true,hidethumbs=false, verbose=true]{thumbs}  
+\definecolor{chaptergray}{rgb}{0.85,0.85,0.85}
+\usepackage{cancel}
+\usepackage{qrcode}
+\usepackage{changepage}
+\strictpagecheck
+
+\usepackage{todonotes}
+
+%Hoofdstuk lineaire stelsel:
+\usepackage[metapost]{mfpic}
+%\usepackage[pdflatex]{graphicx}
+
+
+%%%%%%%%%%%%%%%%%
+%% PAGE LAYOUT %%
+%%%%%%%%%%%%%%%%%
+\newcommand{\nomunit}[1]{%
+ \renewcommand{\nomentryend}{\hspace*{\fill}#1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+   
+   
+\newdimen\tcolw \tcolw=2.5em % the column width
+\edef\ecatcode{\catcode`&=\the\catcode`&\relax}\catcode`&=4
+\def\sgchart#1#2{\vbox{\offinterlineskip\halign{\hfil##\quad&##\hfil\crcr\sgchartA#2,:,%
+   \omit\sgchartR&\kern.2pt\sgchartS{.5\tcolw}\relax\sgchartE#1,\relax,%
+   \sgchartS{.5\tcolw}\relax\cr
+   \noalign{\kern2pt}&\def~{}\kern.5\tcolw\sgchartD#1,\relax,\cr}}}
+\def\sgchartA#1:#2,{\cr\ifx,#1,\else $#1$&\sgchartB#2{}\expandafter\sgchartA\fi}
+\def\sgchartB#1{\hbox to\tcolw{\hss$#1$\hss}\sgchartC}
+\def\sgchartC#1{\ifx,#1,\else
+   \strut\vrule\kern-.4pt\hbox to\tcolw{\hss$#1$\hss}\expandafter\sgchartC\fi}
+\def\sgchartD#1#2,{\ifx\relax#1\else\hbox to\tcolw{\hss$#1#2$\hss}\expandafter\sgchartD\fi}
+\def\sgchartE#1#2,{\ifx\relax#1\else
+    \ifx~#1\sgchartS\tcolw\circ \else\sgchartS\tcolw\bullet\fi \expandafter\sgchartE\fi}
+\def\sgchartR{\leaders\vrule height2.8pt depth-2.4pt\hfil}
+\def\sgchartS#1#2{\hbox to#1{\kern-.2pt\sgchartR \ifx\relax#2\else
+   \kern-.7pt$#2$\kern-.7pt\sgchartR\fi\kern-.2pt}}
+\ecatcode
+
+
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\arsech}{arsech}
+\DeclareMathOperator{\arcsch}{arcsch}
+\DeclareMathOperator{\arcoth}{arcoth} 
+\DeclareMathOperator{\atan2}{atan2}
+
+\newcommand{\surfaceS}{\ensuremath{\mathcal{S}}}
+
+
+\newcommand{\la}{\left\langle}
+\newcommand{\ra}{\right\rangle}
+\newcommand{\dotp}[2]{\ensuremath{\vec #1 \cdot \vec #2}}
+\newcommand{\proj}[2]{\ensuremath{\text{proj}_{\,\vec #2}{\,\vec #1}}}
+\newcommand{\crossp}[2]{\ensuremath{\vec #1 \times \vec #2}}
+\newcommand{\veci}{\ensuremath{\vec i}}
+\newcommand{\vecj}{\ensuremath{\vec j}}
+\newcommand{\veck}{\ensuremath{\vec k}}
+\newcommand{\vecu}{\ensuremath{\vec u}}
+\newcommand{\vecv}{\ensuremath{\vec v}}
+\newcommand{\vecw}{\ensuremath{\vec w}}
+\newcommand{\vecx}{\ensuremath{\vec x}}
+\newcommand{\vecy}{\ensuremath{\vec y}}
+\newcommand{\vnorm}[1]{\ensuremath{\norm{\vec #1}}}
+\newcommand{\snorm}[1]{\ensuremath{\left|\left|\ #1\ \right|\right|}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dsum}{\displaystyle\sum}
+\newcommand{\dlim}{\displaystyle\lim}
+
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+
+\newcommand{\fp}{\ensuremath{f\,'}}
+\newcommand{\fpp}{\ensuremath{f\,''}}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccsc}{arccsc}
+\newcommand{\dx}{\ensuremath{\Delta x}}
+\newcommand{\dy}{\ensuremath{\Delta y}}
+%\newcommand{\dz}{\ensuremath{\Delta z}}
+\newcommand{\ddz}{\ensuremath{\Delta z}}
+
+\newcommand{\Fp}{\ensuremath{F'}}
+\newcommand{\Fpp}{\ensuremath{F''}}
+
+
+\newcommand{\vrp}{\ensuremath{\vec r\, '}}
+\newcommand{\vsp}{\ensuremath{\vec s\, '}}
+\newcommand{\vrt}{\ensuremath{\vec r(t)}}
+\newcommand{\vst}{\ensuremath{\vec s(t)}}
+\newcommand{\vvt}{\ensuremath{\vec v(t)}}
+\newcommand{\vat}{\ensuremath{\vec a(t)}}
+\newcommand{\px}{\ensuremath{\partial x}}
+\newcommand{\py}{\ensuremath{\partial y}}
+\newcommand{\pz}{\ensuremath{\partial z}}
+\newcommand{\pf}{\ensuremath{\partial f}}
+
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\divv}{div}
+
+\let\arrowedvec=\vec
+\renewcommand{\vec}[1]{\arrowedvec{\bm{#1}}}
+
+\let\arrowedhat=\hat
+\renewcommand{\hat}[1]{\arrowedhat{\bm{#1}}}
+
+\let\arrowedwidehat=\widehat
+\renewcommand{\widehat}[1]{\arrowedwidehat{\bm{#1}}}
+
+\usepackage{mmacells}
+
+
+\mmaDefineMathReplacement[≤]{<=}{\leq}
+\mmaDefineMathReplacement[≥]{>=}{\geq}
+\mmaDefineMathReplacement[≠]{!=}{\neq}
+\mmaDefineMathReplacement[→]{->}{\to}[2]
+\mmaDefineMathReplacement[⧴]{:>}{:\hspace{-.2em}\to}[2]
+\mmaDefineMathReplacement{∉}{\notin}
+\mmaDefineMathReplacement{∞}{\infty}
+\mmaDefineMathReplacement{��}{\mathbbm{d}}
+
+
+\mmaSet{
+  morefv={gobble=2},
+  linklocaluri=mma/symbol/definition:#1,
+  morecellgraphics={yoffset=1.9ex}
+}
+
+
+\floatstyle{plaintop}
+\restylefloat{table}
+
+\input{page_layout_definition}
+\parskip=\medskipamount
+%\chapterstyle{veelo}
+%%%%%%%%%%%%%%%%%
+%% HYPHENATION %%
+%%%%%%%%%%%%%%%%%
+\input{hyphenation.tex} % to have a separate file with hyphenations
+\input{defs}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand{\dom}[1]{\text{dom}{#1}}
+\newcommand{\im}[1]{\text{im}{#1}}
+
+\newtheorem{mydef}{Definition}
+
+\theoremstyle{nonumberplain}
+\theoremsymbol{\ensuremath{\square}}
+\theorembodyfont{\upshape}
+\newtheorem{proof}{Proof}
+
+\theoremstyle{break}
+\theorembodyfont{\itshape}
+\theoremsymbol{}
+\newmdtheoremenv[%
+outerlinewidth= 3,%
+roundcorner= 5 pt,%
+leftmargin= 40,%
+rightmargin= 40,%
+outerlinecolor= gray,%
+innertopmargin=\topskip,%
+splittopskip=\topskip,%
+ntheorem=  true,%
+] {theorem}{Stelling}[chapter]
+
+\theoremstyle{break}
+\theorembodyfont{\normalfont}
+\theoremsymbol{}
+\newmdtheoremenv[%
+outerlinewidth= 3,%
+roundcorner= 5 pt,%
+leftmargin= 40,%
+rightmargin= 40,%
+outerlinecolor= gray,%
+innertopmargin=\topskip,%
+splittopskip=\topskip,%
+ntheorem=  true,%
+] {definition}{Definitie}[chapter]
+
+\theorembodyfont{\normalfont}
+\theoremheaderfont{\bfseries\fontsize{13}{11}\selectfont} 
+\newmdtheoremenv[%
+outerlinewidth= 5,%
+leftmargin= 40,%
+rightmargin= 40,%
+outerlinecolor= gray,%
+innertopmargin=\topskip,%
+splittopskip=\topskip,%
+ntheorem=  true,%
+topline=false,%
+bottomline=false,%
+rightline=false,%
+] {example}{Example}[chapter]
+
+%\theorembodyfont{\normalfont}
+%\theoremheaderfont{\bfseries\fontsize{13}{11}\selectfont} 
+%\newmdtheoremenv[%
+%outerlinewidth= 5,%
+%leftmargin= 40,%
+%rightmargin= 40,%
+%outerlinecolor= gray,%
+%innertopmargin=\topskip,%
+%splittopskip=\topskip,%
+%ntheorem=  true,%
+%topline=false,%
+%bottomline=false,%
+%rightline=false,%
+%] {example}{Example}[chapter]
+
+
+\theoremstyle{nonumberplain}
+\newmdtheoremenv[%
+outerlinewidth= 5,%
+leftmargin= 40,%
+rightmargin= 40,%
+outerlinecolor= gray!20,%
+innertopmargin=\topskip,%
+splittopskip=\topskip,%
+ntheorem= false,%
+topline=false,%
+bottomline=false,%
+rightline=false,%
+] {JupyterMarkdown}{}
+
+\ifpython
+\usepackage{morewrites}
+\usepackage[most]{tcolorbox}
+\definecolor{white}{rgb}{1,1,1}
+\definecolor{mygreen}{rgb}{0,0.4,0}
+\definecolor{grayPy}{rgb}{0.90,0.90,0.90}
+\definecolor{mykey}{rgb}{0.117,0.403,0.713}
+
+\tcbuselibrary{listings}
+\newlength\inwd
+\setlength\inwd{1.3cm}
+
+\newcounter{ipythcntr}
+\renewcommand{\theipythcntr}{\texttt{[\arabic{ipythcntr}]}}
+
+\newtcblisting{pyin}[1][]{%
+  sharp corners,
+  enlarge left by=\inwd,
+  width=\linewidth-\inwd,
+  enhanced,
+  boxrule=1pt,
+  colback=grayPy,
+  listing only,
+  top=0pt,
+  bottom=0pt,
+  overlay={
+    \node[
+      anchor=north east,
+      text width=\inwd,
+      font=\footnotesize\ttfamily\color{mykey},
+      inner ysep=2mm,
+      inner xsep=0pt,
+      outer sep=0pt
+      ] 
+      at (frame.north west)
+      {\refstepcounter{ipythcntr}\label{#1}In \theipythcntr:};
+  }
+  listing engine=listing,
+  listing options={
+    aboveskip=1pt,
+    belowskip=1pt,
+    basicstyle=\footnotesize\ttfamily,
+    language=Python,
+    keywordstyle=\color{mykey},
+    showstringspaces=false,
+    stringstyle=\color{mygreen}
+  },
+}
+\newtcblisting{pyprint}{
+  sharp corners,
+  enlarge left by=\inwd,
+  width=\linewidth-\inwd,
+  enhanced,
+  boxrule=0pt,
+  colback=white,
+  listing only,
+  top=0pt,
+  bottom=0pt,
+  overlay={
+    \node[
+      anchor=north east,
+      text width=\inwd,
+      font=\footnotesize\ttfamily\color{mykey},
+      inner ysep=2mm,
+      inner xsep=0pt,
+      outer sep=0pt
+      ] 
+      at (frame.north west)
+      {};
+  }
+  listing engine=listing,
+  listing options={
+      aboveskip=1pt,
+      belowskip=1pt,
+      basicstyle=\footnotesize\ttfamily,
+      language=Python,
+      keywordstyle=\color{mykey},
+      showstringspaces=false,
+      stringstyle=\color{mygreen}
+    },
+}
+\newtcblisting{pyout}[1][\theipythcntr]{
+  sharp corners,
+  enlarge left by=\inwd,
+  width=\linewidth-\inwd,
+  enhanced,
+  boxrule=1pt,
+  colback=white,
+  listing only,
+  top=0pt,
+  bottom=0pt,
+  overlay={
+    \node[
+      anchor=north east,
+      text width=\inwd,
+      font=\footnotesize\ttfamily\color{mykey},
+      inner ysep=2mm,
+      inner xsep=0pt,
+      outer sep=0pt
+      ] 
+      at (frame.north west)
+      {\setcounter{ipythcntr}{\value{ipythcntr}}Out#1:};
+  }
+  listing engine=listing,
+  listing options={
+      aboveskip=1pt,
+      belowskip=1pt,
+      basicstyle=\footnotesize\ttfamily,
+      language=Python,
+      keywordstyle=\color{mykey},
+      showstringspaces=false,
+      stringstyle=\color{mygreen},
+      escapeinside=||
+    },
+}
+
+
+\fi
+
+\ifmathematica
+\lstset{language=Mathematica,commentstyle=, framexleftmargin=5mm,belowcaptionskip=5mm, frame=single,basicstyle={\ttfamily\small}, stringstyle=\small,commentstyle=\textcolor[rgb]{0.53,0.53,0.53}, backgroundcolor=\color[rgb]{0.93,0.93,0.93},showspaces=false,framexleftmargin=-2pt,showstringspaces=false,upquote=true,literate={ë}{{\"e}}1}
+\fi
+
+
+\graphicspath{{figures/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%SIDENOTE BOX%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\theremark{}
+\makeatletter
+\mdf@dolist{\mdf@do@stringoption}{%
+  {remarktitle=={}}%
+}        
+\newrobustcmd\mdfcreateremarkextratikz{%
+  \node[anchor=west,rounded corners,draw=gray,thick,fill=gray!40,xshift=2cm,minimum height=.7cm,minimum width=2cm] at (P-|O) 
+      {%~\mdf@frametitlefont{\theremark}%
+      %\ifdefempty{\mdf@remarktitle}%
+      %{~}%
+      %{:~\mdf@remarktitle~}%
+      \mdf@frametitlefont{\mdf@remarktitle}
+      };
+}
+\makeatother
+\newcommand{\doextratikz}[1]{%
+  \letcs\mdfcreateextratikz{mdfcreate#1extratikz}%
+}
+\mdfdefinestyle{remarkstyle}{% 
+  outerlinewidth=1pt,
+  innerlinewidth=3pt,
+  roundcorner=5pt,
+  linecolor=gray,
+  splittopskip=1cm,         
+  splitbottomskip=1cm,     
+  tikzsetting={fill=gray!10},
+  innertopmargin=1.2\baselineskip,
+  skipabove={\dimexpr0.5\baselineskip+\topskip\relax},
+  needspace=3\baselineskip,
+  frametitlefont=\sffamily\bfseries,
+  settings={\doextratikz{remark}},
+  }
+\newenvironment{remark}[1][]
+  {\begin{mdframed}[font=\footnotesize,style=remarkstyle,remarktitle={#1}]
+  \relax}{
+  \end{mdframed}
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+%\newcommand{\nomunit}[1]{%
+%\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
+\makenomenclature
+\makeglossaries
+\makeindex
+\newindex{aut}{adx}{and}{Nederlandse trefwoordenlijst}
+
+\renewcommand{\nomname}{List of Symbols}
+\renewcommand{\acronymname}{List of Acronyms}
+%\input{glossary}
+%\renewcommand{\nompreamble}{\markboth{LIST OF SYMBOLS}{LIST OF SYMBOLS}}
+
+
+\newcommand{\tagarray}{%
+\mbox{}\refstepcounter{equation}%
+$(\theequation)$%
+}
+
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+
+
+\makeatletter
+\xpatchcmd\epigraphhead
+ {\let\@evenfoot}
+ {\let\@oddfoot\@empty\let\@evenfoot}
+ {}{}
+\makeatother
+
+\newcommand{\dotrule}[1]{%
+   \parbox[t]{#1}{\dotfill}}
+   
+   
+   %%% mooie stellingenlijst
+   
+\makeatletter
+\patchcmd{\thm@@thmline@noname}{2.3em}{4em}{}{}
+\patchcmd{\thm@@thmline@noname}{2.3em}{4em}{}{}
+\patchcmd{\thm@@thmline@noname}{2.3em}{4em}{}{}
+\patchcmd{\thm@@thmline@name}{2.3em}{4em}{}{}
+\patchcmd{\thm@@thmline@name}{2.3em}{4em}{}{}
+\patchcmd{\thm@@thmline@name}{2.3em}{4em}{}{}
+\makeatother
+
+
+%% Code voor de oefeningenomgeving
+% \makeatletter
+% \let\origref\ref
+% \if@AnswerDelay\AtBeginEnvironment{Answer}{%
+% \def\ref#1{%
+% \IfRefUndefinedExpandable{#1}{\textcolor{red}{UNDEFINED \detokenize{#1}}}{\origref{#1}}}%
+% }%
+% \fi
+% \if@AnswerOutput\else
+% \AtBeginEnvironment{Answer}{%
+% \def\ref#1{%
+% \IfRefUndefinedExpandable{#1}{\textcolor{red}{UNDEFINED \detokenize{#1}}}{\origref{#1}}}%
+% }%
+% \fi
+% \makeatother
+\renewcommand{\QuestionNB}{(\alph{Question})\ }
+
+\usepackage{ifthen}
+\newboolean{firstanswerofthechapter}  
+\setlength{\Exeleftmargin}{1.75cm}
+\setlength{\QuestionIndent}{2cm}
+\renewcommand{\DifficultyMarker}{\PHplaneTree}
+\renewcommand{\ExerciseListName}{Opgave}
+\renewcommand{\ExerciseName}{Opgave}
+\renewcommand{\ExerciseListHeader}{\makebox[1cm][l]{\ExerciseHeaderDifficulty}\textbf{\ExerciseListName\,  \ExerciseHeaderNB\, --- \:}}
+\renewcommand{\ExerciseHeader}{\makebox[1cm][l]{\ExerciseHeaderDifficulty}\textbf{\ExerciseListName\,  \ExerciseHeaderNB\, --- \:}}
+\renewcommand{\AnswerListHeader}{\medskip\textbf{\ExerciseListName\,\ExerciseHeaderNB\, --- \:}}
+\counterwithin{Exercise}{chapter}  
+
+\renewcommand{\AnswerHeader}{\ifthenelse{\boolean{firstanswerofthechapter}}
+    {\bigskip\noindent{\Huge{\textbf{Hoofdstuk} \thechapter}\newline\newline\newline\normalsize\medskip\textbf{\ExerciseListName\,\ExerciseHeaderNB\, --- \:}}}
+    {\medskip\textbf{\ExerciseListName\,\ExerciseHeaderNB\, --- \:}}}
+
+
+%% Code moeilijkheidsniveaus
+
+\newcommand{\itemlow}{\if\value{enumii}=0
+\stepcounter{enumi}
+\else
+\stepcounter{enumii}
+\fi
+\item[{\includegraphics[width=0.01\textwidth]{low}} (\if\value{enumii}=0
+\theenumi
+\else
+\theenumii
+\fi)]}
+
+
+\newcommand\lowBattery{%
+  \scalebox{.8}{\rotatebox{90}{\faBatteryQuarter}}%
+}
+
+\newcommand\mediumBattery{%
+  \scalebox{.8}{\rotatebox{90}{\faBatteryHalf}}%
+}
+
+\newcommand\highBattery{%
+  \scalebox{.8}{\rotatebox{90}{\faBatteryFull}}%
+}
+
+%\newcommand{\itemlowi}{\stepcounter{enumi}\item[{\includegraphics[width=0.01\textwidth]{low}}\theenumi.]}
+\newcommand{\itemlowi}{\stepcounter{enumi}\item[{\lowBattery} \theenumi.]}
+\newcommand{\itemlowii}{\stepcounter{enumii}\item[{\lowBattery} (\theenumii)]}
+
+\newcommand{\itemmediumi}{\stepcounter{enumi}\item[{\mediumBattery} \theenumi.]}
+\newcommand{\itemmediumii}{\stepcounter{enumii}\item[{\mediumBattery} (\theenumii)]}
+
+\newcommand{\itemhighi}{\stepcounter{enumi}\item[{\highBattery} \theenumi.]}
+\newcommand{\itemhighii}{\stepcounter{enumii}\item[{\highBattery} (\theenumii)]}
+
+
+\begin{document}
+
+\frontmatter
+%\include{Text/titlepage}
+\ifcourse
+\ifanalysis
+\includepdf{Text/Cover_Analysis}
+\fi
+\ifcalculus
+%\includepdf{Text/Cover_Calculus}
+\includepdf{Text/Cover_Calculus_DE}
+\fi
+\fi
+
+\ifvc
+%\includepdf{Text/Cover_Remedial}
+\fi
+
+\ifcourse
+\include{Text/Preface}
+\fi
+
+\ifvc
+%\include{Text/Preface_VC}
+\fi
+
+
+\tableofcontents
+
+
+
+%\printnomenclature[2cm]
+%\printglossary[type=\acronymtype,title={List of Acronyms},toctitle=LIST OF ACRONYMS,style=super]
+%\addcontentsline{toc}{chapter}{List of Acronyms}
+%\clearpage{\pagestyle{empty}\cleardoublepage}
+\mainmatter
+\ifcourse
+\include{Text/Intro}
+
+
+\epigraphhead[500]{\hspace*{-13cm}\includegraphics[width=3.5\textwidth]{Cartoon_1}} 
+\part{Precalculus}
+\label{deel1}
+
+\include{Text/Sets}
+\include{Text/Functions}
+\include{Text/Algebraic}   
+\include{Text/Trans}
+\include{Text/Vectors}
+\include{Text/Ana_Geo}
+\fi
+
+
+
+\ifcourse
+\epigraphhead[500]{\hspace*{-13cm}\includegraphics[width=3.5\textwidth]{Cartoon_2}} 
+\graphicspath{{figures/}}
+\part{Single variable calculus}
+\label{deel2}
+\fi
+
+\include{Text/Lim}
+\include{Text/Diff}
+\include{Text/Behaviour} 
+\include{Text/Parametric}
+\include{Text/Int}
+\include{Text/Int_App}
+
+
+
+
+\ifanalysis
+\include{Text/Series}
+\fi
+\include{Text/Vector_Fun}
+
+\ifvc
+\include{Text/Matrix_det}
+\include{Text/Systems_lin_eq.tex}
+\fi
+
+\epigraphhead[500]{\hspace*{-13cm}\includegraphics[width=3.5\textwidth]{Cartoon_4}} 
+\graphicspath{{figures/}}
+\part{Multivariable calculus}
+\label{deel3}
+
+\include{Text/Multi_Var}
+
+
+\ifcalculus
+\include{Text/Double}
+\fi
+ \ifanalysis
+\include{Text/Multiple}
+\include{Text/Vector_Calc}
+\fi
+
+
+
+\ifDE
+\epigraphhead[500]{\hspace*{-13cm}\includegraphics[width=3.5\textwidth]{Cartoon_3}} 
+\graphicspath{{figures/}}
+\part{Differential equations}
+\label{deel4}
+
+\include{Text/IntroDE}
+\include{Text/First_Order_Qual}
+\include{Text/First_Order_Quan}
+\fi
+
+
+\stopthumb
+\epigraphhead[500]{\hspace*{-13cm}} 
+\part{Appendices}
+
+\appendix
+
+
+\include{Text/Proofing_Techniques}
+\ifmathematica
+\include{Text/Mathematica}
+\fi
+\include{Text/PythonTutorial}
+\ifpython
+\include{Text/Sympy}
+\fi
+
+
+\chapter{Answers to the exercises}
+\shipoutAnswer
+
+\include{Text/Synthese-oefeningen}
+\shipoutAnswer
+
+
+
+
+%\bibliographystyle{elsarticle-harv}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{harvard}
+%\bibliography{biblioPhD}
+
+
+
+\chapter{Lijst met definities}
+\theoremlisttype{all}
+\listtheorems{definition}
+
+\chapter{Lijst met stellingen}
+\theoremlisttype{all}
+\listtheorems{theorem}
+
+\backmatter
+\printindex
+\end{document}
